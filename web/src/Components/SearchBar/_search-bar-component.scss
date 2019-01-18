@@ -1,0 +1,30 @@
+.search-bar {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    border-radius: 2px;
+    border-bottom: 2px solid $primary;
+    z-index: 1;
+
+    .input {
+        margin-left: 14px;
+        width: 90%;
+    }
+
+    .icon {
+        margin-left: auto;
+    }
+
+    .divider {
+        width: 1px;
+        height: 28px;
+        margin: 4px;
+    }
+}
