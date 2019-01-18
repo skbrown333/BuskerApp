@@ -1,0 +1,20 @@
+{
+  "name": "buskerapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd ./web && npm start && cd ../api && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skbrown333/BuskerApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skbrown333/BuskerApp/issues"
+  },
+  "homepage": "https://github.com/skbrown333/BuskerApp#readme"
+}

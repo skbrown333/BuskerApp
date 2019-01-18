@@ -10,7 +10,6 @@ class Main extends Component {
     return (
       <div>
         <Header />
-        <SearchBar />
         <Map />
       </div>
     );

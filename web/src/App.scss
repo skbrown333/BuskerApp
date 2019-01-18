@@ -1,2 +1,23 @@
 @import "./Constants/constants";
-@import "./Components/component-styles"
+@import "./Components/component-styles";
+
+
+
+.pac-container {
+  position: absolute;
+  right: 0 !important;
+  left: 0 !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 70% !important;
+  &:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+    background-image: none !important;
+    height: 0px;
+  }
+
+  .pac-item {
+    cursor: pointer;
+  }
+}
