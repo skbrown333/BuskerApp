@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import Divider from "@material-ui/core/Divider";
 import LocationIcon from "@material-ui/icons/MyLocation";
 const google = window.google;
 
 class SearchBar extends Component {
   onPlacesChanged = () => {
+    let input = ReactDOM.findDOMNode(this.refs.input);
+
     if (this.props.onPlacesChanged) {
       this.searchBar.getPlaces();
 
       let data = this.searchBar.getPlaces();
-      this.props.onPlacesChanged(data);
+      this.props.onPlacesChanged(data, input);
     }
   };
   componentDidMount() {
-    var input = ReactDOM.findDOMNode(this.refs.input);
+    let input = ReactDOM.findDOMNode(this.refs.input);
+
     this.searchBar = new google.maps.places.SearchBox(input);
     this.searchBarListener = this.searchBar.addListener(
       "places_changed",
@@ -28,17 +29,23 @@ class SearchBar extends Component {
     google.maps.event.removeListener(this.searchBarListener);
   }
 
+  clearInput = () => {
+    let input = ReactDOM.findDOMNode(this.refs.input);
+    input.value = "";
+  };
+
   render() {
     return (
       <div className="search-bar">
+        <SearchIcon className="search-bar__icon" />
+
         <input
           ref="input"
           onChange={this.onPlacesChanged}
+          onClick={this.clearInput}
           className="search-bar__input"
           placeholder="Search"
         />
-        <SearchIcon className="search-bar__icon" />
-        <Divider className="search-bar__divider" />
         <IconButton
           className="search-bar__location"
           onClick={this.props.getMyLocation}

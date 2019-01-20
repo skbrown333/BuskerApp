@@ -1,17 +1,22 @@
 .search-bar {
     position: absolute;
-    top: 100px;
+    top: 20px;
     right: 0;
     left: 0;
     margin: auto;
-    width: 70%;
+    width: 90%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     background-color: white;
     border-radius: 2px;
-   // border-bottom: 2px solid $primary;
+    border-bottom: 2px solid #e4e4e4;
     z-index: 1;
+
+    @include respond-to(gt-sm) {
+        width: 70%;
+        top: 80px;
+    }
 
 
     .search-bar__input {
@@ -24,8 +29,8 @@
 
     .search-bar__icon {
         color: $primary;
-        margin-left: auto;
-        margin-right: 4px;
+        margin-right: auto;
+        margin-left: 12px;
     }
 
     .search-bar__divider {

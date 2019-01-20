@@ -1,5 +1,6 @@
 @import "./Constants/constants";
 @import "./Components/component-styles";
+@import "./Dialogs/dialogs-styles";
 
 
 
@@ -10,14 +11,30 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  width: 70% !important;
+  width: 90% !important;
+  border-bottom: 2px solid #e4e4e4;
+  border-top: none;
+  box-shadow: none;
+
+
+
   &:after {
     /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
     background-image: none !important;
     height: 0px;
   }
 
+  @include respond-to(gt-sm) {
+    width: 70% !important;
+  }
+
   .pac-item {
     cursor: pointer;
+    border: none;
+    padding: 4px;
+    padding-left: 12px;
+    .pac-icon{
+      display: none;
+    }
   }
 }
