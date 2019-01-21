@@ -1,11 +1,11 @@
 .search-bar {
     position: absolute;
-    top: 20px;
+    top: 0px;
     right: 0;
     left: 0;
     margin: auto;
-    //height: 60px;
-    width: 90%;
+    height: 60px;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -15,8 +15,11 @@
     z-index: 1;
 
     @include respond-to(gt-sm) {
-        width: 70%;
-        top: 80px;
+        height: 50px;
+        width: 40%;
+        top: 10px;
+        background-color: $grey-3;
+        border-bottom: none;
     }
 
 
@@ -26,6 +29,14 @@
         font-size: 10pt;
         margin-left: 14px;
         width: 90%;
+        height: 40px;
+        font-size: 14pt;
+        background-color: white;
+
+        @include respond-to(gt-sm) {
+            background-color: $grey-3;
+
+        }
     }
 
     .search-bar__icon {
@@ -41,6 +52,9 @@
     }
 
     .search-bar__location {
+        width: 50px;
+        height: 50px;
+        font-size: 50px;
         border-radius: unset;
         color: $grey-1;
     }

@@ -119,6 +119,10 @@ class Main extends Component {
         <GoogleMapReact
           ref="map"
           bootstrapURLKeys={{ key: API_KEY }}
+          onClick={() => {
+            let input = document.getElementById("search-input");
+            input.blur();
+          }}
           defaultCenter={{
             lat: 43.079,
             lng: -89.386408

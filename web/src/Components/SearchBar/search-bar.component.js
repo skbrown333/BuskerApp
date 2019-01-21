@@ -41,6 +41,7 @@ class SearchBar extends Component {
 
         <input
           ref="input"
+          id="search-input"
           onChange={this.onPlacesChanged}
           onClick={this.clearInput}
           className="search-bar__input"

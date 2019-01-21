@@ -5,9 +5,11 @@ import PersonIcon from "@material-ui/icons/PersonOutlined";
 import EventIcon from "@material-ui/icons/CalendarToday";
 
 class Header extends Component {
+  componentDidMount() {}
+
   render() {
     return (
-      <div className="header">
+      <div id="header" className="header">
         <IconButton>
           <GlobeIcon className="header-icon selected" />
         </IconButton>

@@ -7,7 +7,7 @@ import Header from "../Header/header.component";
 class Main extends Component {
   render() {
     return (
-      <div>
+      <div className="main">
         <Header />
         <Map />
       </div>

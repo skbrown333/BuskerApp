@@ -2,7 +2,7 @@
 
 .map {
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc(var(--vh, 1vh) * 100 - 50px);
+    height: calc(var(--vh, 1vh) * 100 - 60px);
     width: 100%;
 
     @include respond-to(gt-sm) {
