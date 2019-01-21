@@ -8,7 +8,7 @@
     align-items: center;
     background-color: white;
     z-index: 1;
-    border-top: 2px solid #e4e4e4;
+    border-top: 2px solid $grey-2;
     border-bottom: none;
 
     button:last-of-type{
@@ -20,11 +20,21 @@
         height: 60px;
         justify-content: flex-end;
         border-top: none;
-        border-bottom: 2px solid #e4e4e4;
+        border-bottom: 2px solid $grey-2;
 
         button:last-of-type {
             margin-right: 12px;
         }
+    }
+
+    .header-icon {
+        color: $grey-1;
+        padding: 4px;
+    }
+
+    .selected {
+        border: 2px dotted $grey-1;
+        border-radius: 4px;
     }
     
 }

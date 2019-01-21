@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GoogleMapTheme from "./GoogleMapTheme.json";
 
 /* Components */
 import GoogleMapReact from "google-map-react";
@@ -8,7 +9,19 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 /* Services */
 import EventService from "../../Services/Event/event.service";
+
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
+// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+// We listen to the resize event
+window.addEventListener("resize", () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+});
 
 class Main extends Component {
   state = {
@@ -83,7 +96,7 @@ class Main extends Component {
     if (this.state.loading) {
       return (
         <div className="loading-bar-container">
-          <LinearProgress className="loading-bar" color="secondary" />
+          <LinearProgress className="loading-bar" color="primary" />
         </div>
       );
     } else {
@@ -118,6 +131,7 @@ class Main extends Component {
             disableDefaultUI: true,
             gestureHandling: "greedy",
             enableHighAccuracy: true
+            //styles: GoogleMapTheme
           }}
         >
           {this.state.eventPins}

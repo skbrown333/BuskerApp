@@ -1,8 +1,13 @@
 @import "./EventPin/event-pin.component";
 
 .map {
-    height: 100vh;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100 - 50px);
     width: 100%;
+
+    @include respond-to(gt-sm) {
+        height: 100vh;
+    }
 }
 
 .loading-bar-container {

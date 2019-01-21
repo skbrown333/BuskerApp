@@ -24,14 +24,14 @@ class EventPin extends Component {
     let event = this.props.event;
 
     return (
-      <div className="event-pin" name={event.name} onClick={this.onClick}>
+      <div className="event-pin" name={event.name}>
         <EventDialog
           onClose={this.onClose}
           open={this.state.open}
           event={this.props.event}
         />
         <div className="event-pin__icon-background" />
-        <PersonPin className="event-pin__icon" />
+        <PersonPin className="event-pin__icon" onClick={this.onClick} />
       </div>
     );
   }

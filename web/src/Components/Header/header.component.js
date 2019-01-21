@@ -9,13 +9,13 @@ class Header extends Component {
     return (
       <div className="header">
         <IconButton>
-          <GlobeIcon />
+          <GlobeIcon className="header-icon selected" />
         </IconButton>
         <IconButton>
-          <EventIcon />
+          <EventIcon className="header-icon" />
         </IconButton>
         <IconButton>
-          <PersonIcon />
+          <PersonIcon className="header-icon" />
         </IconButton>
       </div>
     );
