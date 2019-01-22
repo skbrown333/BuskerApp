@@ -3,11 +3,19 @@ import React, { Component } from "react";
 /* Components */
 import GoogleMapReact from "google-map-react";
 import EventPin from "./EventPin/event-pin.component";
-import SearchBar from "../SearchBar/search-bar.component";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import IconButton from "@material-ui/core/IconButton";
+import LocationIcon from "@material-ui/icons/MyLocation";
+import SearchIcon from "@material-ui/icons/Search";
+import AddIcon from "@material-ui/icons/Add";
+
+/* Dialogs */
+import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
+import CreateEventDialog from "../../Dialogs/CreateEventDialog/create-event.dialog";
 
 /* Services */
 import EventService from "../../Services/Event/event.service";
+import AccountService from "../../Services/Account/account.service";
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -29,7 +37,9 @@ class Main extends Component {
       lat: 43.079,
       lng: -89.386408
     },
-    zoom: 12
+    zoom: 12,
+    searchOpen: false,
+    createEvent: false
   };
 
   componentDidMount() {
@@ -37,9 +47,18 @@ class Main extends Component {
   }
 
   getEventPins() {
-    EventService.getAll().then(events => {
-      this.setEventPins(events);
-    });
+    let eventPromises = [];
+    EventService.getAll()
+      .then()
+      .then(events => {
+        eventPromises = events.map(event => {
+          return AccountService.getById(event.account).then(res => {
+            event.user = res.name;
+          });
+        });
+
+        Promise.all(eventPromises).then(this.setEventPins(events));
+      });
   }
 
   setEventPins(events) {
@@ -66,7 +85,7 @@ class Main extends Component {
       lng: data[0].geometry.location.lng()
     };
 
-    this.setState({ center: _center });
+    this.setState({ center: _center, searchOpen: false });
   };
 
   getMyLocation = () => {
@@ -81,7 +100,7 @@ class Main extends Component {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          this.setState({ center: myLocation, loading: false, zoom: 15 });
+          this.setState({ center: myLocation, loading: false, zoom: 14 });
         },
         error => {
           this.setState({ loading: false });
@@ -107,21 +126,61 @@ class Main extends Component {
     this.setState({ center: properties.center, zoom: properties.zoom });
   };
 
+  onClick = () => {
+    this.setState({ searchOpen: true });
+  };
+
+  onClose = () => {
+    this.setState({ searchOpen: false });
+  };
+
   render() {
     return (
       <div className="map">
         {this.isLoading()}
-        <SearchBar
-          onPlacesChanged={this.search}
-          getMyLocation={this.getMyLocation}
-        />
+        <div className="map-actions">
+          <IconButton
+            className="map-actions__icon-button"
+            onClick={this.onClick}
+            aria-label="Search"
+          >
+            <SearchIcon className="map-actions__icon" />
+          </IconButton>
+          <SearchDialog
+            open={this.state.searchOpen}
+            onClose={this.onClose}
+            search={this.search}
+          />
+          <IconButton
+            className="map-actions__icon-button"
+            onClick={this.getMyLocation}
+            aria-label="Location"
+          >
+            <LocationIcon className="map-actions__icon" />
+          </IconButton>
+          <IconButton
+            className="map-actions__icon-button"
+            onClick={() => {
+              this.setState({ createEvent: true });
+            }}
+          >
+            <AddIcon className="map-actions__icon" />
+          </IconButton>
+          <CreateEventDialog
+            open={this.state.createEvent}
+            onClose={() => {
+              this.setState({ createEvent: false });
+            }}
+          />
+        </div>
+
         <GoogleMapReact
           ref="map"
           bootstrapURLKeys={{ key: API_KEY }}
           onClick={() => {
-            let input = document.getElementById("search-input");
-            input.value = "";
-            input.blur();
+            //  let input = document.getElementById("search-input");
+            // input.value = "";
+            //  input.blur();
           }}
           defaultCenter={{
             lat: 43.079,

@@ -7,6 +7,8 @@ let Event = new Schema({
     required: true
   },
   name: String,
+  description: String,
+  love: { type: Number, default: 0 },
   lat: { type: Number, required: true },
   lng: { type: Number, required: true },
   time: String

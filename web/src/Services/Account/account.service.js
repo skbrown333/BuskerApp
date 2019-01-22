@@ -4,16 +4,14 @@ const Constants = require("../../Constants/constants");
 class AccountService {
   getAll() {
     return new Promise((resolve, reject) => {
-      axios.get(Constants.routes.account.getAll).then(res => {
+      axios.get(Constants.routes.account).then(res => {
         resolve(res.data);
       });
     });
   }
   getById(accountID) {
-    console.log(Constants.routes.account.getAll + "/" + accountID);
     return new Promise((resolve, reject) => {
-      axios.get(Constants.routes.account.getAll + "/" + accountID).then(res => {
-        console.log(res);
+      axios.get(Constants.routes.account + "/" + accountID).then(res => {
         resolve(res.data);
       });
     });

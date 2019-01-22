@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import LocationIcon from "@material-ui/icons/MyLocation";
+import CloseIcon from "@material-ui/icons/Close";
 const google = window.google;
 
 class SearchBar extends Component {
@@ -48,13 +48,9 @@ class SearchBar extends Component {
         />
         <IconButton
           className="search-bar__location"
-          onClick={() => {
-            this.clearInput();
-            this.props.getMyLocation();
-          }}
-          aria-label="Location"
+          onClick={this.props.onClose}
         >
-          <LocationIcon />
+          <CloseIcon />
         </IconButton>
       </div>
     );

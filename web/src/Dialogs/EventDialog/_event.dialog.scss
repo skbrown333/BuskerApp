@@ -1,97 +1,75 @@
 .event-dialog {
     .event-dialog-content {
-        margin-top: 42px;
-        margin-left: 12px;
-        height: 40vh;
-        padding: 12px;
+        position: relative;
+        margin-top: 22px;
+        height: auto;
+        max-height: 2   00px !important;
         display: flex;
         flex-direction: column;
+        overflow-x: hidden;
+
 
         @include respond-to(gt-xs) {
-            margin-left: 42px;
+            margin-top: 42px;
         }
 
-        .event-dialog__user {
+        .event-content {
+            overflow-y: scroll;
+            width: 100%;
+            padding-right: 17px;
+        }
+        .event-info {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .event-info__item {
             display: flex;
             align-items: center;
             font-size: 18pt;
             color: $grey-1;
             font-family: 'futura';
-            text-transform: lowercase;
-            margin-bottom: 8px;
+            height: 35px;
+            margin-left: 14px;
 
-            @include respond-to(gt-xs) {
-                margin-bottom: 12px;
-                font-size: 22pt;
+            &.location {
+                font-family: 'Lato', serif;
+                font-size: 14pt;
+                max-width: 100%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
 
-            .event-dialog-user__icon {
-                width: 30px;
-                height: 30px;
-                font-size: 30pt;
-                margin-right: 12px;
-
-                @include respond-to(gt-xs) {
-                    width: 40px;
-                    height: 40px;
-                    font-size: 40pt;
-                }
-            }
-        }
-
-        .event-dialog__location {
-            display: flex;
-            align-items: center;
-            font-size: 12pt;
-            color: $grey-1;
-            font-family: 'futura';
-            text-transform: lowercase;
-            margin-bottom: 8px;
-
-            @include respond-to(gt-xs) {
-                margin-bottom: 12px;
+            &.love {
+                font-family: 'Lato', serif;
                 font-size: 14pt;
             }
 
-            .event-dialog-location__icon {
+            &.time {
+                font-family: 'Lato', serif;
+                font-size: 14pt;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            @include respond-to(gt-sm) {
+                height: 50px;
+                font-size: 22pt;
+            }
+
+            .event-item__icon {
                 width: 30px;
                 height: 30px;
                 font-size: 30pt;
                 margin-right: 12px;
 
-                @include respond-to(gt-xs) {
-                    width: 40px;
-                    height: 40px;
-                    font-size: 40pt;
-                }
-            }
-        }
-
-        .event-dialog__love {
-            display: flex;
-            align-items: center;
-            font-size: 14pt;
-            color: $blue-1;
-            font-family: 'futura';
-            text-transform: lowercase;
-            margin-bottom: 18px;
-            
-            @include respond-to(gt-xs) {
-                margin-bottom: 22px;
-                font-size: 18pt;
-            }
-
-            .event-dialog-love__icon {
-                color: $primary;
-                width: 30px;
-                height: 30px;
-                font-size: 30pt;
-                margin-right: 12px;
-
-                @include respond-to(gt-xs) {
-                    width: 40px;
-                    height: 40px;
-                    font-size: 40pt;
+                &.love {
+                    color: $primary;
                 }
             }
         }
@@ -99,29 +77,73 @@
         .event-dialog__description {
             display: flex;
             flex-direction: column;
-            font-family: 'futura';
+            font-family: "futura";
+            color: $grey-1;
+            margin-bottom: 16px;
+            overflow-x: hidden;
 
-            .event-dialog-description__title {
-                font-size: 22pt;
+            .event-description__title {
+                font-family: 'Lato', serif;
+                font-size: 18pt;
+                margin-left: 28px;
+                margin-bottom: 4px;
             }
-            .event-dialog-description__content {
-                padding: 2px;
+            .event-description__content {
+                font-family: 'Lato', serif;
+                max-height: 75px;
+                width: calc(100% - 56px);
+                box-sizing: content-box;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                word-wrap: break-word;
+                padding-left: 28px;
+                padding-right: 56px;
+                margin: auto;
+                text-align: left;
+            }
+        }
+
+        .event-dialog-controls {
+            width: 100%;
+            height: 42px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 2px solid $blue-1;
+
+            .event-dialog-control {
+                background-color: $white;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                color: $blue-1;
+
+                .love {
+                    color: $primary;
+                }
             }
         }
     }
     .event-dialog-photo {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
         background-color: $white;
         border-radius: 50%;
         border: 4px solid $grey-2;
         position: fixed;
         left: 50%;
         right: 50%;
-        margin-top: -100px;
-        margin-left: -75px;
+        margin-top: -70px;
+        margin-left: -50px;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include respond-to(gt-xs) {
+            width: 150px;
+            height: 150px;
+            margin-top: -95px;
+            margin-left: -75px;
+        }
     }
 }

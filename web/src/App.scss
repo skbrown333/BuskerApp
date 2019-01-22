@@ -14,19 +14,14 @@ body {
   margin-right: auto;
   margin-top: 12px;
   width: 100% !important;
-  border-bottom: 2px solid $grey-2;
+  //border-bottom: 2px solid $grey-2;
   border-top: none;
   box-shadow: none;
+  z-index: 10000;
 
   &:after {
-    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
     background-image: none !important;
     height: 0px;
-  }
-
-  @include respond-to(gt-sm) {
-    width: 40% !important;
-    margin-top: 0;
   }
 
   .pac-item {
