@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GoogleMapTheme from "./GoogleMapTheme.json";
 
 /* Components */
 import GoogleMapReact from "google-map-react";
@@ -121,6 +120,7 @@ class Main extends Component {
           bootstrapURLKeys={{ key: API_KEY }}
           onClick={() => {
             let input = document.getElementById("search-input");
+            input.value = "";
             input.blur();
           }}
           defaultCenter={{

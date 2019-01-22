@@ -2,6 +2,10 @@
 @import "./Components/component-styles";
 @import "./Dialogs/dialogs-styles";
 
+body {
+  touch-action: none;
+}
+
 .pac-container {
   position: absolute;
   right: 0 !important;

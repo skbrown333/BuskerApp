@@ -38,12 +38,11 @@ class SearchBar extends Component {
     return (
       <div className="search-bar">
         <SearchIcon className="search-bar__icon" />
-
         <input
           ref="input"
           id="search-input"
           onChange={this.onPlacesChanged}
-          onClick={this.clearInput}
+          onBlur={this.clearInput}
           className="search-bar__input"
           placeholder="Search"
         />

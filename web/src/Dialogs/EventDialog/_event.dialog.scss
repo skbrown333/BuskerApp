@@ -1,6 +1,113 @@
 .event-dialog {
     .event-dialog-content {
-        height: 50vh;
+        margin-top: 42px;
+        margin-left: 12px;
+        height: 40vh;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+
+        @include respond-to(gt-xs) {
+            margin-left: 42px;
+        }
+
+        .event-dialog__user {
+            display: flex;
+            align-items: center;
+            font-size: 18pt;
+            color: $grey-1;
+            font-family: 'futura';
+            text-transform: lowercase;
+            margin-bottom: 8px;
+
+            @include respond-to(gt-xs) {
+                margin-bottom: 12px;
+                font-size: 22pt;
+            }
+
+            .event-dialog-user__icon {
+                width: 30px;
+                height: 30px;
+                font-size: 30pt;
+                margin-right: 12px;
+
+                @include respond-to(gt-xs) {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 40pt;
+                }
+            }
+        }
+
+        .event-dialog__location {
+            display: flex;
+            align-items: center;
+            font-size: 12pt;
+            color: $grey-1;
+            font-family: 'futura';
+            text-transform: lowercase;
+            margin-bottom: 8px;
+
+            @include respond-to(gt-xs) {
+                margin-bottom: 12px;
+                font-size: 14pt;
+            }
+
+            .event-dialog-location__icon {
+                width: 30px;
+                height: 30px;
+                font-size: 30pt;
+                margin-right: 12px;
+
+                @include respond-to(gt-xs) {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 40pt;
+                }
+            }
+        }
+
+        .event-dialog__love {
+            display: flex;
+            align-items: center;
+            font-size: 14pt;
+            color: $blue-1;
+            font-family: 'futura';
+            text-transform: lowercase;
+            margin-bottom: 18px;
+            
+            @include respond-to(gt-xs) {
+                margin-bottom: 22px;
+                font-size: 18pt;
+            }
+
+            .event-dialog-love__icon {
+                color: $primary;
+                width: 30px;
+                height: 30px;
+                font-size: 30pt;
+                margin-right: 12px;
+
+                @include respond-to(gt-xs) {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 40pt;
+                }
+            }
+        }
+
+        .event-dialog__description {
+            display: flex;
+            flex-direction: column;
+            font-family: 'futura';
+
+            .event-dialog-description__title {
+                font-size: 22pt;
+            }
+            .event-dialog-description__content {
+                padding: 2px;
+            }
+        }
     }
     .event-dialog-photo {
         width: 150px;
