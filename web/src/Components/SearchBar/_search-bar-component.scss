@@ -9,7 +9,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: white;
+    background-color: $white;
     border-radius: 2px;
     border-bottom: 2px solid $grey-2;
     z-index: 1;
@@ -31,7 +31,7 @@
         width: 90%;
         height: 40px;
         font-size: 14pt;
-        background-color: white;
+        background-color: $white;
 
         @include respond-to(gt-sm) {
             background-color: $grey-3;

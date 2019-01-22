@@ -42,13 +42,16 @@ class SearchBar extends Component {
           ref="input"
           id="search-input"
           onChange={this.onPlacesChanged}
-          onBlur={this.clearInput}
+          onClick={this.clearInput}
           className="search-bar__input"
           placeholder="Search"
         />
         <IconButton
           className="search-bar__location"
-          onClick={this.props.getMyLocation}
+          onClick={() => {
+            this.clearInput();
+            this.props.getMyLocation();
+          }}
           aria-label="Location"
         >
           <LocationIcon />
