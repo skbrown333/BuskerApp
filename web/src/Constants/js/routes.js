@@ -1,6 +1,6 @@
 let routes = {};
 
-const BASE_ROUTE = "https://192.168.1.14:3007";
+const BASE_ROUTE = "https://192.168.32.34:3007";
 
 routes.event = `${BASE_ROUTE}/events`;
 
