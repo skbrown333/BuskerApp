@@ -31,14 +31,16 @@
             font-family: 'futura';
             height: 35px;
             margin-left: 14px;
+            width: 100%;
+
+            @include respond-to(gt-sm) {
+                width: 50%;
+            }
+
 
             &.location {
                 font-family: 'Lato', serif;
-                font-size: 14pt;
-                max-width: 100%;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
+                font-size: 12pt;
             }
 
             &.love {
@@ -79,6 +81,10 @@
             overflow-x: hidden;
             margin-bottom: 84px;
 
+            @include respond-to(gt-sm) {
+                margin-bottom: 64px;
+            }
+
             .event-description__title {
                 font-family: 'Lato', serif;
                 font-size: 18pt;
@@ -112,8 +118,9 @@
             border-top: 2px solid $blue-1;
             background-color: $white;
 
-
-
+            @include respond-to(gt-sm) {
+                height: 42px;
+            }
 
             .event-dialog-control {
                 background-color: $white;

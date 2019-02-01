@@ -8,13 +8,11 @@ const google = window.google;
 
 class SearchBar extends Component {
   onPlacesChanged = () => {
-    let input = ReactDOM.findDOMNode(this.refs.input);
-
     if (this.props.onPlacesChanged) {
       this.searchBar.getPlaces();
 
       let data = this.searchBar.getPlaces();
-      this.props.onPlacesChanged(data, input);
+      this.props.onPlacesChanged(data);
     }
   };
   componentDidMount() {

@@ -48,7 +48,6 @@ class Main extends Component {
 
   async getEventPins() {
     let events = await EventService.getAll();
-
     await Promise.all(
       events.map(async event => {
         let account = await AccountService.getById(event._id);
@@ -60,8 +59,6 @@ class Main extends Component {
   }
 
   setEventPins(events) {
-    if (this.state.eventPins.length) return;
-
     let eventPins = events.map(event => {
       return (
         <EventPin
@@ -83,7 +80,7 @@ class Main extends Component {
       lng: data[0].geometry.location.lng()
     };
 
-    this.setState({ center: _center, searchOpen: false });
+    this.setState({ center: _center, zoom: 14, searchOpen: false });
   };
 
   getMyLocation = () => {
@@ -166,6 +163,9 @@ class Main extends Component {
           </IconButton>
           <CreateEventDialog
             open={this.state.createEvent}
+            addEvent={() => {
+              this.getEventPins();
+            }}
             onClose={() => {
               this.setState({ createEvent: false });
             }}
@@ -175,11 +175,6 @@ class Main extends Component {
         <GoogleMapReact
           ref="map"
           bootstrapURLKeys={{ key: API_KEY }}
-          onClick={() => {
-            //  let input = document.getElementById("search-input");
-            // input.value = "";
-            //  input.blur();
-          }}
           defaultCenter={{
             lat: 43.079,
             lng: -89.386408

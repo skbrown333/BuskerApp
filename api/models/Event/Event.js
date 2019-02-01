@@ -11,7 +11,9 @@ let Event = new Schema({
   love: { type: Number, default: 0 },
   lat: { type: Number, required: true },
   lng: { type: Number, required: true },
-  time: String
+  address: { type: String, required: true },
+  start_time: { type: String, required: true },
+  end_time: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Event", Event);

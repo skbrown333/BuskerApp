@@ -16,4 +16,11 @@ export class BaseService {
       let res = await axios.get(this.route);
       return res.data[0];
     }
+
+    async create(options: Object) {
+      try {
+        let res = await axios.post(this.route + "/create", options);
+        return res;
+      } catch (err) {}
+    }
 }

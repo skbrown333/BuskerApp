@@ -1,26 +1,90 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import Dialog from "@material-ui/core/Dialog";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import Button from "@material-ui/core/Button";
+import EventService from "../../Services/Event/event.service";
 
+const google = window.google;
 class EventDialog extends Component {
-  state = {
-    fullScreen: false
-  };
-  componentDidMount() {
-    window.addEventListener("resize", this.resize.bind(this));
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fullScreen: false,
+      name: "",
+      start_time: "",
+      end_time: "",
+      lat: null,
+      lng: null,
+      description: "",
+      address: ""
+    };
+
+    this.createEvent = this.createEvent.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.onPlacesChanged = this.onPlacesChanged.bind(this);
+    this.resize = this.resize.bind(this);
+  }
+
+  handleOpen() {
+    this.resizeListener = window.addEventListener("resize", this.resize);
     this.resize();
+
+    let input = ReactDOM.findDOMNode(this.refs.input);
+
+    this.searchBar = new google.maps.places.SearchBox(input);
+    this.searchBarListener = this.searchBar.addListener(
+      "places_changed",
+      this.onPlacesChanged
+    );
+  }
+
+  handleClose() {
+    window.removeEventListener("resize", this.resizeListener);
+    google.maps.event.removeListener(this.searchBarListener);
+    this.props.onClose();
   }
 
   resize() {
     this.setState({ fullScreen: window.innerWidth <= 760 });
   }
 
+  onPlacesChanged() {
+    this.searchBar.getPlaces();
+    let data = this.searchBar.getPlaces();
+
+    if (!data || !data.length) return;
+
+    let lat = data[0].geometry.location.lat();
+    let lng = data[0].geometry.location.lng();
+    let address = data[0].formatted_address;
+
+    this.setState({ lat: lat, lng: lng, address: address });
+  }
+
+  async createEvent() {
+    let options = {
+      account: "5c41ff724dc7580bf7e21a63",
+      name: this.state.name,
+      start_time: this.state.start_time,
+      end_time: this.state.end_time,
+      description: this.state.description,
+      lat: this.state.lat,
+      lng: this.state.lng,
+      address: this.state.address
+    };
+
+    await EventService.create(options);
+    this.props.addEvent();
+    this.props.onClose();
+  }
+
   render() {
     return (
       <Dialog
-        onClose={this.props.onClose}
+        onClose={this.handleClose}
+        onEnter={this.handleOpen}
         open={this.props.open}
         className="create-event-dialog"
         fullScreen={this.state.fullScreen}
@@ -29,12 +93,6 @@ class EventDialog extends Component {
       >
         <div className="create-event-header">
           <div className="header-title">New Event</div>
-          <div className="header-actions">
-            <Button className="header-save">Save</Button>
-            <IconButton className="header-close" onClick={this.props.onClose}>
-              <CloseIcon className="header-close__icon" />
-            </IconButton>
-          </div>
         </div>
         <div className="create-event-content">
           <div className="content-input">
@@ -42,32 +100,48 @@ class EventDialog extends Component {
               type="text"
               className="input"
               placeholder="Event Name"
-              onChange={() => {}}
+              onChange={event => {
+                this.setState({ name: event.target.value });
+              }}
             />
             <input
               type="time"
               className="input time"
               placeholder="Start Time"
-              onChange={() => {}}
+              onChange={event => {
+                this.setState({ start_time: event.target.value });
+              }}
             />
             <input
               type="time"
               className="input time"
               placeholder="End Time"
-              onChange={() => {}}
+              onChange={event => {
+                this.setState({ end_time: event.target.value });
+              }}
             />
             <input
-              type="text"
+              ref="input"
               className="input"
               placeholder="Location"
-              onChange={() => {}}
+              onChange={this.onPlacesChanged}
             />
             <textarea
               className="input description"
               placeholder="Description"
-              onChange={() => {}}
+              onChange={event => {
+                this.setState({ description: event.target.value });
+              }}
             />
           </div>
+        </div>
+        <div className="event-dialog-controls">
+          <Button className="event-dialog-control" onClick={this.createEvent}>
+            Create
+          </Button>
+          <Button className="event-dialog-control" onClick={this.props.onClose}>
+            Close
+          </Button>
         </div>
       </Dialog>
     );

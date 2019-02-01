@@ -9,12 +9,24 @@ import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
 
 class EventDialog extends Component {
-  state = {
-    fullScreen: false
-  };
-  componentDidMount() {
-    window.addEventListener("resize", this.resize.bind(this));
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullScreen: false
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.resize = this.resize.bind(this);
+  }
+
+  handleOpen() {
+    this.resizeListener = window.addEventListener("resize", this.resize);
     this.resize();
+  }
+
+  handleClose() {
+    window.removeEventListener("resize", this.resizeListener);
+    this.props.onClose();
   }
 
   resize() {
@@ -24,7 +36,8 @@ class EventDialog extends Component {
   render() {
     return (
       <Dialog
-        onClose={this.props.onClose}
+        onClose={this.handleClose}
+        onEnter={this.handleOpen}
         open={this.props.open}
         aria-labelledby="simple-dialog-title"
         className="event-dialog"
@@ -42,7 +55,7 @@ class EventDialog extends Component {
               </div>
               <div className="event-info__item location">
                 <LocationIcon className="event-item__icon" />
-                <div>142 West Johnson Street</div>
+                <div>{this.props.event.address}</div>
               </div>
               <div className="event-info__item love">
                 <HeartIcon className="event-item__icon love" />
@@ -50,7 +63,9 @@ class EventDialog extends Component {
               </div>
               <div className="event-info__item time">
                 <TimeIcon className="event-item__icon time" />
-                <div>12:00 a.m - 1:00 p.m.</div>
+                <div>
+                  {this.props.event.start_time} - {this.props.event.end_time}
+                </div>
               </div>
             </div>
             <div className="event-dialog__description">
@@ -58,7 +73,7 @@ class EventDialog extends Component {
                 {this.props.event.name}:
               </div>
               <div className="event-description__content">
-                Come check us out.
+                {this.props.event.description}
               </div>
             </div>
           </div>

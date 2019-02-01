@@ -5,8 +5,6 @@ import PersonIcon from "@material-ui/icons/PersonOutlined";
 import EventIcon from "@material-ui/icons/CalendarToday";
 
 class Header extends Component {
-  componentDidMount() {}
-
   render() {
     return (
       <div id="header" className="header">
