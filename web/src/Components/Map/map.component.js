@@ -46,19 +46,17 @@ class Main extends Component {
     this.getEventPins();
   }
 
-  getEventPins() {
-    let eventPromises = [];
-    EventService.getAll()
-      .then()
-      .then(events => {
-        eventPromises = events.map(event => {
-          return AccountService.getById(event.account).then(res => {
-            event.user = res.name;
-          });
-        });
+  async getEventPins() {
+    let events = await EventService.getAll();
 
-        Promise.all(eventPromises).then(this.setEventPins(events));
-      });
+    await Promise.all(
+      events.map(async event => {
+        let account = await AccountService.getById(event._id);
+        event.user = account.name;
+      })
+    );
+
+    this.setEventPins(events);
   }
 
   setEventPins(events) {

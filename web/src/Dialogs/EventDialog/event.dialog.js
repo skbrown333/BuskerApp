@@ -9,6 +9,18 @@ import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
 
 class EventDialog extends Component {
+  state = {
+    fullScreen: false
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+    this.setState({ fullScreen: window.innerWidth <= 960 });
+  }
+
   render() {
     return (
       <Dialog
@@ -16,14 +28,13 @@ class EventDialog extends Component {
         open={this.props.open}
         aria-labelledby="simple-dialog-title"
         className="event-dialog"
+        fullScreen={this.state.fullScreen}
         fullWidth={true}
         maxWidth={"sm"}
       >
-        <DialogTitle id="simple-dialog-title">
-          <div className="event-dialog-photo" />
-        </DialogTitle>
         <div className="event-dialog-content">
           <div className="event-content">
+            <div className={"event-dialog-photo"} />
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+
 const google = window.google;
 
 class SearchBar extends Component {

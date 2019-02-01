@@ -1,20 +1,31 @@
 import React, { Component } from "react";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import TextField from "@material-ui/core/TextField";
-import MapComponent from "../../Components/Map/map.component";
 import Button from "@material-ui/core/Button";
+
 class EventDialog extends Component {
+  state = {
+    fullScreen: false
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+    this.setState({ fullScreen: window.innerWidth <= 760 });
+  }
+
   render() {
     return (
       <Dialog
         onClose={this.props.onClose}
         open={this.props.open}
         className="create-event-dialog"
-        fullScreen={true}
-        maxWidth={"xl"}
+        fullScreen={this.state.fullScreen}
+        fullWidth={true}
+        maxWidth={"md"}
       >
         <div className="create-event-header">
           <div className="header-title">New Event</div>
@@ -57,7 +68,6 @@ class EventDialog extends Component {
               onChange={() => {}}
             />
           </div>
-          <MapComponent />
         </div>
       </Dialog>
     );

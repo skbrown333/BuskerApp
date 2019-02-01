@@ -1,20 +1,13 @@
 .event-dialog {
     .event-dialog-content {
         position: relative;
-        margin-top: 22px;
-        height: auto;
-        max-height: 2   00px !important;
+        height: 100%;
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
 
-
-        @include respond-to(gt-xs) {
-            margin-top: 42px;
-        }
-
         .event-content {
-            overflow-y: scroll;
+            overflow: hidden;
             width: 100%;
             padding-right: 17px;
         }
@@ -24,6 +17,10 @@
             flex-wrap: wrap;
             height: 150px;
             overflow: hidden;
+
+            @include respond-to(gt-sm) {
+                margin-top: 82px;
+             }
         }
 
         .event-info__item {
@@ -79,8 +76,8 @@
             flex-direction: column;
             font-family: "futura";
             color: $grey-1;
-            margin-bottom: 16px;
             overflow-x: hidden;
+            margin-bottom: 84px;
 
             .event-description__title {
                 font-family: 'Lato', serif;
@@ -90,8 +87,8 @@
             }
             .event-description__content {
                 font-family: 'Lato', serif;
-                max-height: 75px;
                 width: calc(100% - 56px);
+                max-height: 100px;
                 box-sizing: content-box;
                 overflow-y: scroll;
                 overflow-x: hidden;
@@ -104,12 +101,19 @@
         }
 
         .event-dialog-controls {
+            position: absolute;
+            bottom: 0;
             width: 100%;
-            height: 42px;
+            height: 62px;
+            margin-top: auto;
             display: flex;
             justify-content: space-around;
             align-items: center;
             border-top: 2px solid $blue-1;
+            background-color: $white;
+
+
+
 
             .event-dialog-control {
                 background-color: $white;
@@ -130,20 +134,27 @@
         background-color: $white;
         border-radius: 50%;
         border: 4px solid $grey-2;
-        position: fixed;
-        left: 50%;
-        right: 50%;
-        margin-top: -70px;
-        margin-left: -50px;
+        margin: 0 auto;
+        margin: 8px auto;
+
         display: flex;
         justify-content: center;
         align-items: center;
 
-        @include respond-to(gt-xs) {
+        @include respond-to(gt-sm) {
             width: 150px;
             height: 150px;
-            margin-top: -95px;
+            background-color: $white;
+            border-radius: 50%;
+            border: 4px solid $grey-2;
+            position: fixed;
+            left: 50%;
+            right: 50%;
+            margin-top: -75px;
             margin-left: -75px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
