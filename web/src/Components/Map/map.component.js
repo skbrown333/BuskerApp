@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import LocationIcon from "@material-ui/icons/MyLocation";
 import SearchIcon from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import CreateIcon from "@material-ui/icons/Create";
 
 /* Dialogs */
 import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
@@ -159,7 +161,7 @@ class Main extends Component {
               this.setState({ createEvent: true });
             }}
           >
-            <AddIcon className="map-actions__icon" />
+            <CreateIcon className="map-actions__icon" />
           </IconButton>
           <CreateEventDialog
             open={this.state.createEvent}
@@ -187,7 +189,6 @@ class Main extends Component {
             disableDefaultUI: true,
             gestureHandling: "greedy",
             enableHighAccuracy: true
-            //styles: GoogleMapTheme
           }}
         >
           {this.state.eventPins}
