@@ -9,7 +9,9 @@ import LocationIcon from "@material-ui/icons/MyLocation";
 import SearchIcon from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import BuildingIcon from "@material-ui/icons/Domain";
 import CreateIcon from "@material-ui/icons/Create";
+import Tooltip from "@material-ui/core/Tooltip";
 
 /* Dialogs */
 import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
@@ -136,33 +138,66 @@ class Main extends Component {
       <div className="map">
         {this.isLoading()}
         <div className="map-actions">
-          <IconButton
-            className="map-actions__icon-button"
-            onClick={this.onClick}
-            aria-label="Search"
+          <Tooltip
+            title="Search"
+            placement="left"
+            enterDelay={500}
+            leaveDelay={200}
           >
-            <SearchIcon className="map-actions__icon" />
-          </IconButton>
+            <IconButton
+              className="map-actions__icon-button"
+              onClick={this.onClick}
+              aria-label="Search"
+            >
+              <SearchIcon className="map-actions__icon" />
+            </IconButton>
+          </Tooltip>
+
           <SearchDialog
             open={this.state.searchOpen}
             onClose={this.onClose}
             search={this.search}
           />
-          <IconButton
-            className="map-actions__icon-button"
-            onClick={this.getMyLocation}
-            aria-label="Location"
+          <Tooltip
+            title="My Location"
+            placement="left"
+            enterDelay={500}
+            leaveDelay={200}
           >
-            <LocationIcon className="map-actions__icon" />
-          </IconButton>
-          <IconButton
-            className="map-actions__icon-button"
-            onClick={() => {
-              this.setState({ createEvent: true });
-            }}
+            <IconButton
+              className="map-actions__icon-button"
+              onClick={this.getMyLocation}
+              aria-label="Location"
+            >
+              <LocationIcon className="map-actions__icon" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="Create Event"
+            placement="left"
+            enterDelay={500}
+            leaveDelay={200}
           >
-            <CreateIcon className="map-actions__icon" />
-          </IconButton>
+            <IconButton
+              className="map-actions__icon-button"
+              onClick={() => {
+                this.setState({ createEvent: true });
+              }}
+            >
+              <CreateIcon className="map-actions__icon" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="Buildings"
+            placement="left"
+            enterDelay={500}
+            leaveDelay={200}
+          >
+            <IconButton className="map-actions__icon-button" onClick={() => {}}>
+              <BuildingIcon className="map-actions__icon" />
+            </IconButton>
+          </Tooltip>
+
           <CreateEventDialog
             open={this.state.createEvent}
             addEvent={() => {
