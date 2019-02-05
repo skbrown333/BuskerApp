@@ -1,17 +1,11 @@
 import React, { Component } from "react";
+import { MAP } from "../../Constants/constants";
 
 /* Components */
 import GoogleMapReact from "google-map-react";
 import EventPin from "./EventPin/event-pin.component";
+import MapActions from "./MapActions/map-actions.component";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import IconButton from "@material-ui/core/IconButton";
-import LocationIcon from "@material-ui/icons/MyLocation";
-import SearchIcon from "@material-ui/icons/Search";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import BuildingIcon from "@material-ui/icons/Domain";
-import CreateIcon from "@material-ui/icons/Create";
-import Tooltip from "@material-ui/core/Tooltip";
 
 /* Dialogs */
 import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
@@ -35,21 +29,74 @@ window.addEventListener("resize", () => {
 });
 
 class Main extends Component {
-  state = {
-    eventPins: [],
-    center: {
-      lat: 43.079,
-      lng: -89.386408
-    },
-    zoom: 12,
-    searchOpen: false,
-    createEvent: false
-  };
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      eventPins: [],
+      center: MAP.default_location,
+      zoom: 12,
+      searchOpen: false,
+      createEventOpen: false
+    };
+
+    this.onMapChange = this.onMapChange.bind(this);
+    this.isLoading = this.isLoading.bind(this);
+    this.getEventPins = this.getEventPins.bind(this);
+    this.setEventPins = this.setEventPins.bind(this);
+    this.onCreateEventOpen = this.onCreateEventOpen.bind(this);
+    this.onCreateEventClose = this.onCreateEventClose.bind(this);
+    this.getMyLocation = this.getMyLocation.bind(this);
+    this.onSearchOpen = this.onSearchOpen.bind(this);
+    this.onSearchClose = this.onSearchClose.bind(this);
+    this.onSearch = this.onSearch.bind(this);
+  }
+
+  /* LIFE CYCLE */
   componentDidMount() {
     this.getEventPins();
   }
 
+  isLoading() {
+    if (this.state.loading) {
+      return (
+        <div className="loading-bar-container">
+          <LinearProgress className="loading-bar" color="primary" />
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  /* LOCATION */
+  onMapChange(properties) {
+    this.setState({ center: properties.center, zoom: properties.zoom });
+  }
+
+  getMyLocation() {
+    this.setState({ loading: true });
+    const location = window.navigator && window.navigator.geolocation;
+    let myLocation;
+
+    if (location) {
+      location.getCurrentPosition(
+        position => {
+          myLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          this.setState({ center: myLocation, loading: false, zoom: 14 });
+        },
+        error => {
+          this.setState({ loading: false });
+        },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+    }
+  }
+
+  /* EVENTS */
   async getEventPins() {
     let events = await EventService.getAll();
     await Promise.all(
@@ -76,7 +123,24 @@ class Main extends Component {
     this.setState({ eventPins: eventPins });
   }
 
-  search = data => {
+  onCreateEventOpen() {
+    this.setState({ createEventOpen: true });
+  }
+
+  onCreateEventClose() {
+    this.setState({ createEventOpen: false });
+  }
+
+  /* SEARCH */
+  onSearchOpen() {
+    this.setState({ searchOpen: true });
+  }
+
+  onSearchClose() {
+    this.setState({ searchOpen: false });
+  }
+
+  onSearch(data) {
     if (!data || !data.length) return;
 
     let _center = {
@@ -85,130 +149,27 @@ class Main extends Component {
     };
 
     this.setState({ center: _center, zoom: 14, searchOpen: false });
-  };
-
-  getMyLocation = () => {
-    this.setState({ loading: true });
-    const location = window.navigator && window.navigator.geolocation;
-    let myLocation;
-
-    if (location) {
-      location.getCurrentPosition(
-        position => {
-          myLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          this.setState({ center: myLocation, loading: false, zoom: 14 });
-        },
-        error => {
-          this.setState({ loading: false });
-        },
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-      );
-    }
-  };
-
-  isLoading() {
-    if (this.state.loading) {
-      return (
-        <div className="loading-bar-container">
-          <LinearProgress className="loading-bar" color="primary" />
-        </div>
-      );
-    } else {
-      return null;
-    }
   }
-
-  onChange = properties => {
-    this.setState({ center: properties.center, zoom: properties.zoom });
-  };
-
-  onClick = () => {
-    this.setState({ searchOpen: true });
-  };
-
-  onClose = () => {
-    this.setState({ searchOpen: false });
-  };
 
   render() {
     return (
       <div className="map">
         {this.isLoading()}
-        <div className="map-actions">
-          <Tooltip
-            title="Search"
-            placement="left"
-            enterDelay={500}
-            leaveDelay={200}
-          >
-            <IconButton
-              className="map-actions__icon-button"
-              onClick={this.onClick}
-              aria-label="Search"
-            >
-              <SearchIcon className="map-actions__icon" />
-            </IconButton>
-          </Tooltip>
-
-          <SearchDialog
-            open={this.state.searchOpen}
-            onClose={this.onClose}
-            search={this.search}
-          />
-          <Tooltip
-            title="My Location"
-            placement="left"
-            enterDelay={500}
-            leaveDelay={200}
-          >
-            <IconButton
-              className="map-actions__icon-button"
-              onClick={this.getMyLocation}
-              aria-label="Location"
-            >
-              <LocationIcon className="map-actions__icon" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="Create Event"
-            placement="left"
-            enterDelay={500}
-            leaveDelay={200}
-          >
-            <IconButton
-              className="map-actions__icon-button"
-              onClick={() => {
-                this.setState({ createEvent: true });
-              }}
-            >
-              <CreateIcon className="map-actions__icon" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="Buildings"
-            placement="left"
-            enterDelay={500}
-            leaveDelay={200}
-          >
-            <IconButton className="map-actions__icon-button" onClick={() => {}}>
-              <BuildingIcon className="map-actions__icon" />
-            </IconButton>
-          </Tooltip>
-
-          <CreateEventDialog
-            open={this.state.createEvent}
-            addEvent={() => {
-              this.getEventPins();
-            }}
-            onClose={() => {
-              this.setState({ createEvent: false });
-            }}
-          />
-        </div>
-
+        <MapActions
+          onSearchOpen={this.onSearchOpen}
+          getMyLocation={this.getMyLocation}
+          onCreateEventOpen={this.onCreateEventOpen}
+        />
+        <SearchDialog
+          open={this.state.searchOpen}
+          onClose={this.onSearchClose}
+          search={this.onSearch}
+        />
+        <CreateEventDialog
+          open={this.state.createEventOpen}
+          addEvent={this.getEventPins}
+          onClose={this.onCreateEventClose}
+        />
         <GoogleMapReact
           ref="map"
           bootstrapURLKeys={{ key: API_KEY }}
@@ -219,7 +180,7 @@ class Main extends Component {
           center={this.state.center}
           zoom={this.state.zoom}
           defaultZoom={11}
-          onChange={this.onChange}
+          onChange={this.onMapChange}
           options={{
             disableDefaultUI: true,
             gestureHandling: "greedy",

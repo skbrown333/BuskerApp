@@ -11,4 +11,15 @@ class Routes {
     }
 }
 
+class Map {
+    default_location: object;
+    constructor() {
+        this.default_location = {
+            lat: 43.079,
+            lng: -89.386408
+        }
+    }
+}
+
 export const ROUTES =  new Routes();
+export const MAP = new Map();
