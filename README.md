@@ -1,7 +1,11 @@
 # BuskerApp
-This is a simple beginners application for full stack development. All skill levels and contributions are welcome.
+This is a fullstack web app to be used by Musicians and users looking for live music. Musicians would be able to create events on a global map and users would be able to see events around them.
 
-The general idea is to create an application that will allow users to create realtime events that can be seen on a map.
+This would help freelance musicians, specifically when busking or playing at smaller venues like restaurants. Any type of contributions are welcome and encouraged!
+
+If you have any questions please feel free to reach out.
+
+![alt text](https://raw.githubusercontent.com/skbrown333/BuskerApp/dev/Mock_Photo.png)
 
 ## Getting Started
 
@@ -26,7 +30,7 @@ npm install
 ```
 
 
-## Deployment
+## Running Locally
 To start the Web Server cd into web/ and run:
 ```
 HTTPS=true npm start
