@@ -1,11 +1,9 @@
-# BuskerApp
-This is a fullstack web app to be used by Musicians and users looking for live music. Musicians would be able to create events on a global map and users would be able to see events around them.
-
-This would help freelance musicians, specifically when busking or playing at smaller venues like restaurants. Any type of contributions are welcome and encouraged!
+# Priestly
+This is a fullstack web app to be used by Priests to offer confession, mass, etc. Any type of contributions are welcome and encouraged!
 
 If you have any questions please feel free to reach out.
 
-![alt text](https://raw.githubusercontent.com/skbrown333/BuskerApp/dev/Mock_Photo.png)
+![alt text](https://raw.githubusercontent.com/skbrown333/Priestly/dev/Mock_Photo.png)
 
 ## Getting Started
 
