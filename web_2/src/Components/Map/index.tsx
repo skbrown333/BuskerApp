@@ -4,12 +4,12 @@ import { MAP } from "../../Constants/constants";
 /* Components */
 import GoogleMapReact from "google-map-react";
 import { EventPin } from "./EventPin";
-import MapActions from "./MapActions/map-actions.component";
+import MapActions from "./MapActions";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 /* Dialogs */
-import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
-import CreateEventDialog from "../../Dialogs/CreateEventDialog/create-event.dialog";
+import SearchDialog from "../../Dialogs/SearchDialog";
+import CreateEventDialog from "../../Dialogs/CreateEventDialog";
 
 /* Services */
 import EventService from "../../Services/Event/event.service";
@@ -28,7 +28,7 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
 
-class Main extends React.Component<any, {}> {
+export class Main extends React.Component<any, {}> {
   constructor(props) {
     super(props);
 
@@ -193,5 +193,3 @@ class Main extends React.Component<any, {}> {
     );
   }
 }
-
-export default Main;
