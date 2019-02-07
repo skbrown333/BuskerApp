@@ -1,8 +1,10 @@
 @import './Constants/constants';
 @import './Components/styles';
+@import './Dialogs/dialogs-styles';
 
 body {
     touch-action: none;
+    margin: 0;
   }
   
   .pac-container {

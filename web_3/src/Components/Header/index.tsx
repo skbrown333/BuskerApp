@@ -5,8 +5,6 @@ import GlobeIcon from "@material-ui/icons/Public";
 import PersonIcon from "@material-ui/icons/PersonOutlined";
 import EventIcon from "@material-ui/icons/CalendarToday";
 
-//import "./styles.scss";
-
 export class Header extends React.Component<any, {}> {
   render() {
     return (

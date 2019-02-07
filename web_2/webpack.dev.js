@@ -8,7 +8,9 @@ module.exports = merge(common, {
   devtool: "source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    historyApiFallback: true
+    historyApiFallback: true,
+    host: "priestly.io",
+    port: 3000
   },
 
   module: {

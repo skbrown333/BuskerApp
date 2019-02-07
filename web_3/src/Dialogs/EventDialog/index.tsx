@@ -1,5 +1,4 @@
 import * as React from "react";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import UserIcon from "@material-ui/icons/PersonOutlined";
@@ -7,9 +6,24 @@ import LocationIcon from "@material-ui/icons/PlaceOutlined";
 import HeartIcon from "@material-ui/icons/Favorite";
 import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
+import { Event } from "../../modules/Event";
 
-class EventDialog extends React.Component<any, {}> {
-  constructor(props) {
+
+interface EventProps  {
+  onClose: any;
+  open: boolean;
+  event: Event;
+}
+
+interface State {
+  readonly fullScreen: boolean;
+}
+
+class EventDialog extends React.Component<EventProps, State> {
+  readonly state: State;
+  resizeListener: any;
+
+  constructor(props: EventProps) {
     super(props);
     this.state = {
       fullScreen: false

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Dialog from "@material-ui/core/Dialog";
-import SearchBar from "../../Components/SearchBar/search-bar";
+import SearchBar from "../../Components/SearchBar";
 
 class EventDialog extends React.Component<any, {}> {
   render() {

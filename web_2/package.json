@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack-dev-server -w --config webpack.dev.js"
+    "start": "webpack-dev-server -w --env.REACT_APP_GOOGLE_MAPS_KEY --config  webpack.dev.js"
   },
   "author": "",
   "dependencies": {
@@ -17,6 +17,7 @@
     "@types/react-dom": "^16.0.3",
     "@types/webpack-env": "^1.13.5",
     "axios": "^0.18.0",
+    "google-map-react": "^1.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
