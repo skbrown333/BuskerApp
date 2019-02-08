@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.scss";
 
 /* Components */
-import Main from "./Components/Main/main.component";
+import { Main } from "./Components/Main";
 
 class App extends Component {
   render() {
