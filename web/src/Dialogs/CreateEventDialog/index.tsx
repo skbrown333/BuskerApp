@@ -1,12 +1,33 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import EventService from "../../Services/Event/event.service";
 
+// @ts-ignore
 const google = window.google;
-class EventDialog extends Component {
-  constructor(props) {
+interface CreateEventProps  {
+  addEvent: any;
+  onClose: any;
+  open: boolean;
+}
+interface State {
+  readonly fullScreen: boolean;
+  readonly name: string;
+  readonly start_time: string;
+  readonly end_time: string;
+  readonly lat: any;
+  readonly lng: any;
+  readonly description: string;
+  readonly address: string;
+}
+class CreateEventDialog extends React.Component<CreateEventProps, State> {
+  readonly state: State;
+  resizeListener: any;
+  searchBar: any;
+  searchBarListener: any;
+
+  constructor(props: CreateEventProps) {
     super(props);
 
     this.state = {
@@ -148,4 +169,4 @@ class EventDialog extends Component {
   }
 }
 
-export default EventDialog;
+export default CreateEventDialog;

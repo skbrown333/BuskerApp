@@ -1,17 +1,21 @@
-import React, { Component } from "react";
+import * as React from "react";
 
 /* Components */
 
-import EventDialog from "../../../Dialogs/EventDialog/event.dialog";
+import EventDialog from "../../../Dialogs/EventDialog";
+import { EventPinProps } from "./EventPin.interfaces";
 
 /* Services */
-import AccountService from "../../../Services/Account/account.service";
 
 /* Icons */
 import PersonPin from "@material-ui/icons/PersonPin";
 
-class EventPin extends Component {
-  state = {
+interface State {
+  readonly open: boolean;
+}
+
+export class EventPin extends React.Component<EventPinProps, State> {
+  readonly state: State = {
     open: false
   };
 
@@ -25,7 +29,7 @@ class EventPin extends Component {
 
   render() {
     return (
-      <div className="event-pin" name={this.props.event.name}>
+      <div className="event-pin">
         <EventDialog
           onClose={this.onClose}
           open={this.state.open}
@@ -37,5 +41,3 @@ class EventPin extends Component {
     );
   }
 }
-
-export default EventPin;

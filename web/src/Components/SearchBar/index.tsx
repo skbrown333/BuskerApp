@@ -1,20 +1,34 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 
+// @ts-ignore
 const google = window.google;
 
-class SearchBar extends Component {
-  onPlacesChanged = () => {
+interface SearchBarProps  {
+  onPlacesChanged: (data: Array<any>) => {};
+  onClose: () => {};
+}
+
+class SearchBar extends React.Component<SearchBarProps> {
+  searchBar: any;
+  searchBarListener: any;
+
+  constructor(props: SearchBarProps) {
+    super(props);
+
+    this.onPlacesChanged = this.onPlacesChanged.bind(this);
+  }
+  onPlacesChanged() {
     if (this.props.onPlacesChanged) {
       this.searchBar.getPlaces();
 
       let data = this.searchBar.getPlaces();
       this.props.onPlacesChanged(data);
     }
-  };
+  }
   componentDidMount() {
     let input = ReactDOM.findDOMNode(this.refs.input);
 
@@ -29,7 +43,7 @@ class SearchBar extends Component {
   }
 
   clearInput = () => {
-    let input = ReactDOM.findDOMNode(this.refs.input);
+    let input: any = ReactDOM.findDOMNode(this.refs.input);
     input.value = "";
   };
 

@@ -1,21 +1,23 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { MAP } from "../../Constants/constants";
 
 /* Components */
 import GoogleMapReact from "google-map-react";
-import EventPin from "./EventPin/event-pin.component";
-import MapActions from "./MapActions/map-actions.component";
+import { EventPin } from "./EventPin";
+import { MapActions } from "./MapActions";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { Event } from "../../modules/Event";
 
 /* Dialogs */
-import SearchDialog from "../../Dialogs/SearchDialog/search.dialog";
-import CreateEventDialog from "../../Dialogs/CreateEventDialog/create-event.dialog";
+import SearchDialog from "../../Dialogs/SearchDialog";
+import CreateEventDialog from "../../Dialogs/CreateEventDialog";
 
 /* Services */
 import EventService from "../../Services/Event/event.service";
 import AccountService from "../../Services/Account/account.service";
 
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
+const API_KEY: any = process.env.REACT_APP_GOOGLE_MAPS_KEY;
+
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
 let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
@@ -28,8 +30,20 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
 
-class Main extends Component {
-  constructor(props) {
+interface State {
+  readonly eventPins: Array<any>;
+  readonly center: any;
+  readonly zoom: number;
+  readonly searchOpen: boolean;
+  readonly createEventOpen: boolean;
+  readonly loading: boolean;
+}
+
+export class Map extends React.Component<any, State> {
+  readonly state: State;
+  mapOptions: any;
+
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -37,8 +51,15 @@ class Main extends Component {
       center: MAP.default_location,
       zoom: 12,
       searchOpen: false,
-      createEventOpen: false
+      createEventOpen: false,
+      loading: false
     };
+
+    this.mapOptions = {
+      disableDefaultUI: true,
+      gestureHandling: "greedy",
+      enableHighAccuracy: true
+    }
 
     this.onMapChange = this.onMapChange.bind(this);
     this.isLoading = this.isLoading.bind(this);
@@ -70,7 +91,7 @@ class Main extends Component {
   }
 
   /* LOCATION */
-  onMapChange(properties) {
+  onMapChange(properties: any) {
     this.setState({ center: properties.center, zoom: properties.zoom });
   }
 
@@ -100,7 +121,7 @@ class Main extends Component {
   async getEventPins() {
     let events = await EventService.getAll();
     await Promise.all(
-      events.map(async event => {
+      events.map(async (event: Event) => {
         let account = await AccountService.getById(event._id);
         event.user = account.name;
       })
@@ -109,8 +130,8 @@ class Main extends Component {
     this.setEventPins(events);
   }
 
-  setEventPins(events) {
-    let eventPins = events.map(event => {
+  setEventPins(events: Array<Event>) {
+    let eventPins = events.map((event: Event) => {
       return (
         <EventPin
           key={event._id}
@@ -140,7 +161,7 @@ class Main extends Component {
     this.setState({ searchOpen: false });
   }
 
-  onSearch(data) {
+  onSearch(data: any) {
     if (!data || !data.length) return;
 
     let _center = {
@@ -170,6 +191,7 @@ class Main extends Component {
           addEvent={this.getEventPins}
           onClose={this.onCreateEventClose}
         />
+        {/* @ts-ignore */}
         <GoogleMapReact
           ref="map"
           bootstrapURLKeys={{ key: API_KEY }}
@@ -181,11 +203,7 @@ class Main extends Component {
           zoom={this.state.zoom}
           defaultZoom={11}
           onChange={this.onMapChange}
-          options={{
-            disableDefaultUI: true,
-            gestureHandling: "greedy",
-            enableHighAccuracy: true
-          }}
+          options={this.mapOptions}
         >
           {this.state.eventPins}
         </GoogleMapReact>
@@ -193,5 +211,3 @@ class Main extends Component {
     );
   }
 }
-
-export default Main;

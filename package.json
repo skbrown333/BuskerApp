@@ -1,5 +1,5 @@
 {
-  "name": "buskerapp",
+  "name": "priestly",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skbrown333/BuskerApp.git"
+    "url": "git+https://github.com/skbrown333/Priestly.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/skbrown333/BuskerApp/issues"
+    "url": "https://github.com/skbrown333/Priestly/issues"
   },
-  "homepage": "https://github.com/skbrown333/BuskerApp#readme"
+  "homepage": "https://github.com/skbrown333/Priestly#readme"
 }
