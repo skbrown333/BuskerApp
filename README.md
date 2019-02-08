@@ -18,7 +18,7 @@ You will need to download/clone the repo to your local machine
 Say what the step will be
 
 ```
-git clone https://github.com/skbrown333/BuskerApp.git
+git clone https://github.com/skbrown333/Priestly.git
 ```
 
 After this finished cd into both the web and api directories and run
