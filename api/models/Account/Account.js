@@ -12,11 +12,12 @@ let Account = new Schema({
     type: String,
     required: true
   },
-  bio: String,
-  instrument: String,
-  location: String,
+  lat: { type: Number },
+  lng: { type: Number },
+  address: { type: String },
   is_active: { type: Boolean, default: false },
-  rating: { type: Number }
+  account_type: { type: String, required: true },
+  hash: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Account", Account);

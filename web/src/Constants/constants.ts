@@ -5,7 +5,7 @@ class Routes {
   account: string;
 
   constructor() {
-    this.base_route = "https://10.80.108.215:3007";
+    this.base_route = "https://priestly.io:3007";
     this.event = `${this.base_route}/events`;
     this.account = `${this.base_route}/accounts`;
   }
