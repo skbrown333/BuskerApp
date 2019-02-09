@@ -82,7 +82,14 @@ class AccountController {
    * Get all accounts
    */
   getAll(req, res) {
-    Account.find({}, (err, accounts) => {
+    let cleanFields = {
+      name: 1,
+      lat: 1,
+      lng: 1,
+      address: 1,
+      is_active: 1
+    };
+    Account.find({}, cleanFields, (err, accounts) => {
       if (err) res.status(500).send(err);
       return res.status(200).send(accounts);
     });
@@ -93,7 +100,14 @@ class AccountController {
    */
   getById(req, res) {
     let accountId = req.params.id;
-    Account.findById(accountId, (err, account) => {
+    let cleanFields = {
+      name: 1,
+      lat: 1,
+      lng: 1,
+      address: 1,
+      is_active: 1
+    };
+    Account.findById(accountId, cleanFields, (err, account) => {
       if (err) res.status(500).send(err);
       return res.status(200).send(account);
     });
