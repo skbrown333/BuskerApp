@@ -1,10 +1,13 @@
 const routes = require("express").Router();
 const AccountController = require("./AccountController");
+const wrapAsync = require("../../utils/utils").wrapAsync;
 
-routes.post("/create", AccountController.create);
-routes.post("/login", AccountController.authorize);
-routes.get("/token", AccountController.getFromToken);
-routes.get("/", AccountController.getAll);
-routes.get("/:id", AccountController.getById);
+let Controller = new AccountController();
+
+routes.post("/create", wrapAsync(Controller.create));
+routes.post("/login", wrapAsync(Controller.authorize));
+routes.post("/token", wrapAsync(Controller.getFromToken));
+routes.get("/", wrapAsync(Controller.getAll));
+routes.get("/:id", wrapAsync(Controller.getById));
 
 module.exports = routes;

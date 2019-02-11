@@ -21,9 +21,21 @@ function getCleanAccount(account) {
   };
 }
 
+function wrapAsync(fn) {
+  return function(req, res, next) {
+    fn(req, res, next).catch(next);
+  };
+}
+
+function handleError(error, req, res, next) {
+  res.json({ message: error.message, status: error.status });
+}
+
 let utils = {
+  handleError: handleError,
   generateToken: generateToken,
-  getCleanAccount: getCleanAccount
+  getCleanAccount: getCleanAccount,
+  wrapAsync: wrapAsync
 };
 
 module.exports = utils;
