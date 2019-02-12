@@ -1,0 +1,63 @@
+
+.input-email {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .input-valid {
+        border-bottom-color: $green;
+        background-color: $white;
+    }
+
+    .input-invalid {
+        border-bottom-color: $red;
+        background-color: $white;
+    }
+    
+    .input-email__valid {
+        background-color: $green;
+        color: $white;
+        position: absolute;
+        visibility: hidden;
+        right: -32px;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $green;
+        border-radius: 2px;
+
+        &.input-valid {
+            @include respond-to(gt-xs) {
+                visibility: visible;
+            }        }
+
+        &.input-invalid {
+            visibility: hidden;
+
+        }
+    }
+
+    .input-email__invalid {
+        background-color: $red;
+        color: $white;
+        position: absolute;
+        visibility: hidden;
+        right: -32px;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $red;
+        border-radius: 2px;
+
+        &.input-invalid {
+            @include respond-to(gt-xs) {
+                visibility: visible;
+            }
+        }
+
+        &.input-valid {
+            visibility: hidden;
+
+        }
+    }
+}

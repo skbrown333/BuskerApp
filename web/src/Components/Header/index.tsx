@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+
 
 import IconButton from "@material-ui/core/IconButton";
 import GlobeIcon from "@material-ui/icons/Public";
@@ -10,13 +12,17 @@ export class Header extends React.Component<any, {}> {
     return (
       <div id="header" className="header">
         <IconButton>
-          <GlobeIcon className="header-icon selected" />
+          <Link to="/">
+            <GlobeIcon className="header-icon selected" />
+          </Link>
         </IconButton>
         <IconButton>
           <EventIcon className="header-icon" />
         </IconButton>
         <IconButton>
-          <PersonIcon className="header-icon" />
+          <Link to="/login">
+            <PersonIcon className="header-icon" />
+          </Link>
         </IconButton>
       </div>
     );
