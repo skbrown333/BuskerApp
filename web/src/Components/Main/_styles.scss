@@ -1,0 +1,9 @@
+.main {
+    width: 100%;
+    height: calc(100vh - 60px);
+
+    @include respond-to(gt-sm) {
+        height: calc(100vh - 70px);
+        padding-top: 70px;
+    }
+}
