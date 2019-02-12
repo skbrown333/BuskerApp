@@ -8,8 +8,7 @@ import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
 import { Event } from "../../modules/Event";
 
-
-interface EventProps  {
+interface EventProps {
   onClose: any;
   open: boolean;
   event: Event;
@@ -65,7 +64,7 @@ class EventDialog extends React.Component<EventProps, State> {
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />
-                <div>{this.props.event.user}</div>
+                <div>{this.props.event.account}</div>
               </div>
               <div className="event-info__item location">
                 <LocationIcon className="event-item__icon" />

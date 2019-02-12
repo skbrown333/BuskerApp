@@ -12,6 +12,7 @@ function generateToken(account) {
 
 function getCleanAccount(account) {
   return {
+    _id: account._id,
     email: account.email,
     name: account.name,
     lat: account.lat,

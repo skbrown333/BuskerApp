@@ -6,7 +6,7 @@ import EventService from "../../Services/Event/event.service";
 
 // @ts-ignore
 const google = window.google;
-interface CreateEventProps  {
+interface CreateEventProps {
   addEvent: any;
   onClose: any;
   open: boolean;
@@ -86,7 +86,7 @@ class CreateEventDialog extends React.Component<CreateEventProps, State> {
 
   async createEvent() {
     let options = {
-      account: "5c41ff724dc7580bf7e21a63",
+      account: "5c62e8211f959c0742af91eb",
       name: this.state.name,
       start_time: this.state.start_time,
       end_time: this.state.end_time,

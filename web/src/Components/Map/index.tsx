@@ -59,7 +59,7 @@ export class Map extends React.Component<any, State> {
       disableDefaultUI: true,
       gestureHandling: "greedy",
       enableHighAccuracy: true
-    }
+    };
 
     this.onMapChange = this.onMapChange.bind(this);
     this.isLoading = this.isLoading.bind(this);
@@ -119,15 +119,17 @@ export class Map extends React.Component<any, State> {
 
   /* EVENTS */
   async getEventPins() {
-    let events = await EventService.getAll();
-    await Promise.all(
-      events.map(async (event: Event) => {
-        let account = await AccountService.getById(event._id);
-        event.user = account.name;
-      })
-    );
+    try {
+      let events = await EventService.getAll();
+      await Promise.all(
+        events.map(async (event: Event) => {
+          let account = await AccountService.getById(event.account);
+          event.account = account.name;
+        })
+      );
 
-    this.setEventPins(events);
+      this.setEventPins(events);
+    } catch (err) {}
   }
 
   setEventPins(events: Array<Event>) {

@@ -55,16 +55,6 @@ export class MapActions extends React.Component<MapActionProps> {
             <CreateIcon className="map-actions__icon" />
           </IconButton>
         </Tooltip>
-        <Tooltip
-          title="Buildings"
-          placement="left"
-          enterDelay={500}
-          leaveDelay={200}
-        >
-          <IconButton className="map-actions__icon-button" onClick={() => {}}>
-            <BuildingIcon className="map-actions__icon" />
-          </IconButton>
-        </Tooltip>
       </div>
     );
   }
