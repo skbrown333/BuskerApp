@@ -1,15 +1,14 @@
 import * as React from "react";
-import CheckIcon from '@material-ui/icons/Done';
-import CloseIcon from '@material-ui/icons/Close';
-
+import CheckIcon from "@material-ui/icons/Done";
+import CloseIcon from "@material-ui/icons/Close";
 
 interface State {
   readonly value: string;
   readonly class: string;
 }
 interface InputEmailProps {
-    onChange: any;
-    placeHolder: string;
+  onChange: any;
+  placeHolder: string;
 }
 export class InputEmail extends React.Component<InputEmailProps, State> {
   readonly state: State;
@@ -19,7 +18,7 @@ export class InputEmail extends React.Component<InputEmailProps, State> {
 
     this.state = {
       value: "",
-      class: ""
+      class: "empty"
     };
 
     this.validateEmail = this.validateEmail.bind(this);
@@ -37,10 +36,10 @@ export class InputEmail extends React.Component<InputEmailProps, State> {
     let isEmail = this.validateEmail(email);
     this.setState({ value: email });
 
-    if(email === "") {
+    if (email === "") {
       this.props.onChange("");
       return;
-    } else if(!isEmail) {
+    } else if (!isEmail) {
       this.props.onChange("");
       return;
     }
@@ -50,15 +49,13 @@ export class InputEmail extends React.Component<InputEmailProps, State> {
   }
 
   onBlur() {
-
     let email = this.state.value;
-    console.log('email: ', !email);
     let isEmail = this.validateEmail(email);
 
-    if(email === "" || !email) {
-      this.setState({ class: "" });
+    if (email === "" || !email) {
+      this.setState({ class: "empty" });
       return;
-    } else if(!isEmail) {
+    } else if (!isEmail) {
       this.setState({ class: "input-invalid" });
       return;
     }
@@ -68,17 +65,17 @@ export class InputEmail extends React.Component<InputEmailProps, State> {
 
   render() {
     return (
-        <div className="input-email">
-            <input 
-              type="text" 
-              className={"input " + this.state.class} 
-              onChange={this.handleChange}
-              onBlur={this.onBlur}
-              placeholder={this.props.placeHolder}>
-            </input>
-            <CheckIcon className={"input-email__valid " + this.state.class} />
-            <CloseIcon className={"input-email__invalid " + this.state.class} />
-        </div>
+      <div className="input-email">
+        <input
+          type="text"
+          className={"input " + this.state.class}
+          onChange={this.handleChange}
+          onBlur={this.onBlur}
+          placeholder={this.props.placeHolder}
+        />
+        <CheckIcon className={"input-email__valid " + this.state.class} />
+        <CloseIcon className={"input-email__invalid " + this.state.class} />
+      </div>
     );
   }
 }

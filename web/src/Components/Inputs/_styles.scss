@@ -1,24 +1,28 @@
-@import './Input/styles';
-@import './InputEmail/styles';
+@import "./Input/styles";
+@import "./InputEmail/styles";
 
 .input {
-    height: 40px;
-    border: none;
-    width: 300px;
-    border: 2px solid $grey-4;
-    background-color: $grey-4;
-    border-radius: 2px;
-    font-size: 12pt;
-    padding: 0px 8px;
-    color: #404040;
-    font-family: "Lato", serif;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    resize: none;
-    margin: 6px;
+  height: 40px;
+  border: none;
+  width: 300px;
+  border: 2px solid $grey-4;
+  background-color: $white;
+  border-radius: 2px;
+  font-size: 12pt;
+  padding: 0px 8px;
+  color: #404040;
+  font-family: "Lato", serif;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  resize: none;
+  margin: 6px;
 
-    &:focus {
-        outline: none;
-        background-color: $white;
-    }
+  &.empty {
+    background-color: $grey-4;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $white;
+  }
 }

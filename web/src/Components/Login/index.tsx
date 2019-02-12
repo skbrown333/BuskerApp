@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Input } from '../Inputs/Input';
-import { InputEmail } from '../Inputs/InputEmail';
+import { Input } from "../Inputs/Input";
+import { InputEmail } from "../Inputs/InputEmail";
 import Button from "@material-ui/core/Button";
 import { InputPassword } from "../Inputs/InputPassword";
-import AccountService from '../../Services/Account/account.service';
+import AccountService from "../../Services/Account/account.service";
 
 interface State {
   readonly email: string;
@@ -17,7 +17,7 @@ export class Login extends React.Component<any, State> {
 
     this.state = {
       email: "",
-      password: "",
+      password: ""
     };
 
     this.handleUsername = this.handleUsername.bind(this);
@@ -26,31 +26,37 @@ export class Login extends React.Component<any, State> {
   }
 
   handleUsername(email: string) {
-    this.setState({email: email});
+    this.setState({ email: email });
   }
 
   handlePassword(password: string) {
-    this.setState({ password: password })
+    this.setState({ password: password });
   }
 
-  async handleLogin() {
+  async handleLogin(event: any) {
+    event.preventDefault();
+    if (this.state.email === "" || this.state.password === "") return;
     let options = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
     let data = await AccountService.authenticate(options);
-    console.log('data: ', data);
+    console.log("data: ", data);
   }
 
   render() {
     return (
-      <div className="login">
-        <InputEmail onChange={this.handleUsername} placeHolder="email"/>
-        <InputPassword onChange={this.handlePassword} placeHolder="password"/>
-        <Button className="login-button" onClick={this.handleLogin}>
-            Login
+      <form className="login" onSubmit={this.handleLogin}>
+        <input type="submit" style={{ display: "none" }} />
+        <InputEmail onChange={this.handleUsername} placeHolder="email" />
+        <InputPassword onChange={this.handlePassword} placeHolder="password" />
+        <Button type="submit" className="login-button--filled">
+          Login
         </Button>
-      </div>
+        <Button className="login-button" onClick={() => {}}>
+          Sign Up
+        </Button>
+      </form>
     );
   }
 }

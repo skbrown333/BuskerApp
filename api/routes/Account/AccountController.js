@@ -50,6 +50,7 @@ class AccountController extends BaseController {
         error.httpStatusCode = 400;
         return next(error);
       }
+
       res.json({
         account: utils.getCleanAccount(account),
         token: utils.generateToken(account)
