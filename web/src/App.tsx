@@ -7,7 +7,7 @@ import { Login } from "./Components/Login";
 export default class App extends React.Component<any, {}> {
   render() {
     return (
-      <div className="main">
+      <div className="app">
         <Route path="/" component={Header} />
         <Route exact path="/" component={Map} />
         <Route path="/login" component={Login} />
