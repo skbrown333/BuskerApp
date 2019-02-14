@@ -1,8 +1,34 @@
 import { combineReducers } from "redux";
-import initialState from "./initialState";
+import { ACCOUNT_ACTION } from "./actions";
 
-const reducer = (state = initialState, action) => {
-  return state;
+const account = (state = {}, action) => {
+  switch (action.type) {
+    case ACCOUNT_ACTION: {
+      let account = action.account;
+      return {
+        ...state,
+        id: account.id,
+        name: account.name,
+        email: account.email,
+        address: account.address,
+        lat: account.lat,
+        lng: account.lng,
+        account_type: account.account_type,
+        is_active: account.is_active
+      };
+    }
+    default: {
+      return state;
+    }
+  }
 };
 
-export default combineReducers({ reducer });
+const toast = (state = [], action) => {
+  switch (action.type) {
+    default: {
+      return state;
+    }
+  }
+};
+
+export default combineReducers({ account, toast });

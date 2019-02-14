@@ -21,5 +21,13 @@ class Map {
   }
 }
 
+class Cookies {
+  token: string;
+  constructor() {
+    this.token = "pr_jwt";
+  }
+}
+
+export const COOKIES = new Cookies();
 export const ROUTES = new Routes();
 export const MAP = new Map();

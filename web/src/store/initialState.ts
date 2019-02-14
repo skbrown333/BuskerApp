@@ -1,5 +1,5 @@
 const initialState: any = {
-  account: null,
+  account: {},
   toast: []
 };
 
