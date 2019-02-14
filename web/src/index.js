@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import { CookiesProvider } from "react-cookie";
 import configureStore from "./store/configureStore";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
@@ -11,11 +12,13 @@ import "./App.scss";
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </CookiesProvider>,
   document.getElementById("root")
 );
 
