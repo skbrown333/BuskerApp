@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import EventService from "../../Services/Event/event.service";
@@ -21,13 +22,13 @@ interface State {
   readonly description: string;
   readonly address: string;
 }
-class CreateEventDialog extends React.Component<CreateEventProps, State> {
+export class CreateEventDialog extends React.Component<any, State> {
   readonly state: State;
   resizeListener: any;
   searchBar: any;
   searchBarListener: any;
 
-  constructor(props: CreateEventProps) {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -86,7 +87,7 @@ class CreateEventDialog extends React.Component<CreateEventProps, State> {
 
   async createEvent() {
     let options = {
-      account: "5c62e8211f959c0742af91eb",
+      account: this.props.account._id,
       name: this.state.name,
       start_time: this.state.start_time,
       end_time: this.state.end_time,
@@ -96,9 +97,13 @@ class CreateEventDialog extends React.Component<CreateEventProps, State> {
       address: this.state.address
     };
 
-    await EventService.create(options);
-    this.props.addEvent();
-    this.props.onClose();
+    try {
+      await EventService.create(options);
+      this.props.addEvent();
+      this.props.onClose();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -169,4 +174,14 @@ class CreateEventDialog extends React.Component<CreateEventProps, State> {
   }
 }
 
-export default CreateEventDialog;
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    account: state.account
+  };
+};
+
+export const CreateEventDialogContainer = connect(
+  mapStateToProps,
+  null
+)(CreateEventDialog);
+export default CreateEventDialogContainer;

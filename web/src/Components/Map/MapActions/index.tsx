@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import LocationIcon from "@material-ui/icons/MyLocation";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,10 +8,35 @@ import CreateIcon from "@material-ui/icons/Create";
 import Tooltip from "@material-ui/core/Tooltip";
 import { MapActionProps } from "./MapAction.interfaces";
 
-export class MapActions extends React.Component<MapActionProps> {
-  constructor(props: MapActionProps) {
+export class MapActions extends React.Component<any> {
+  constructor(props: any) {
     super(props);
+
+    this.isPriest = this.isPriest.bind(this);
   }
+
+  isPriest() {
+    let account = this.props.account;
+
+    if (account && account.account_type === "priest") {
+      return (
+        <Tooltip
+          title="Create Event"
+          placement="left"
+          enterDelay={500}
+          leaveDelay={200}
+        >
+          <IconButton
+            className="map-actions__icon-button"
+            onClick={this.props.onCreateEventOpen}
+          >
+            <CreateIcon className="map-actions__icon" />
+          </IconButton>
+        </Tooltip>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="map-actions">
@@ -42,20 +68,21 @@ export class MapActions extends React.Component<MapActionProps> {
             <LocationIcon className="map-actions__icon" />
           </IconButton>
         </Tooltip>
-        <Tooltip
-          title="Create Event"
-          placement="left"
-          enterDelay={500}
-          leaveDelay={200}
-        >
-          <IconButton
-            className="map-actions__icon-button"
-            onClick={this.props.onCreateEventOpen}
-          >
-            <CreateIcon className="map-actions__icon" />
-          </IconButton>
-        </Tooltip>
+
+        {this.isPriest()}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    account: state.account
+  };
+};
+
+export const MapActionsContainer = connect(
+  mapStateToProps,
+  null
+)(MapActions);
+export default MapActionsContainer;
