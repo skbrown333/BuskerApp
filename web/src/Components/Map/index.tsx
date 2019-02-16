@@ -4,13 +4,13 @@ import { MAP } from "../../Constants/constants";
 /* Components */
 import GoogleMapReact from "google-map-react";
 import { EventPin } from "./EventPin";
-import { MapActions } from "./MapActions";
+import MapActionsContainer from "./MapActions";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Event } from "../../modules/Event";
 
 /* Dialogs */
 import SearchDialog from "../../Dialogs/SearchDialog";
-import CreateEventDialog from "../../Dialogs/CreateEventDialog";
+import CreateEventDialogContainer from "../../Dialogs/CreateEventDialog";
 
 /* Services */
 import EventService from "../../Services/Event/event.service";
@@ -178,7 +178,7 @@ export class Map extends React.Component<any, State> {
     return (
       <div className="map">
         {this.isLoading()}
-        <MapActions
+        <MapActionsContainer
           onSearchOpen={this.onSearchOpen}
           getMyLocation={this.getMyLocation}
           onCreateEventOpen={this.onCreateEventOpen}
@@ -188,7 +188,7 @@ export class Map extends React.Component<any, State> {
           onClose={this.onSearchClose}
           search={this.onSearch}
         />
-        <CreateEventDialog
+        <CreateEventDialogContainer
           open={this.state.createEventOpen}
           addEvent={this.getEventPins}
           onClose={this.onCreateEventClose}

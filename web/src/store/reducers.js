@@ -7,7 +7,7 @@ const account = (state = {}, action) => {
       let account = action.account;
       return {
         ...state,
-        id: account.id,
+        _id: account._id,
         name: account.name,
         email: account.email,
         address: account.address,

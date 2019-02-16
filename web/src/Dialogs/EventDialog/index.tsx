@@ -66,19 +66,15 @@ class EventDialog extends React.Component<EventProps, State> {
                 <UserIcon className="event-item__icon user" />
                 <div>{this.props.event.account}</div>
               </div>
-              <div className="event-info__item location">
-                <LocationIcon className="event-item__icon" />
-                <div>{this.props.event.address}</div>
-              </div>
-              <div className="event-info__item love">
-                <HeartIcon className="event-item__icon love" />
-                <div>(112)</div>
-              </div>
               <div className="event-info__item time">
                 <TimeIcon className="event-item__icon time" />
                 <div>
                   {this.props.event.start_time} - {this.props.event.end_time}
                 </div>
+              </div>
+              <div className="event-info__item location">
+                <LocationIcon className="event-item__icon" />
+                <div>{this.props.event.address}</div>
               </div>
             </div>
             <div className="event-dialog__description">
@@ -91,9 +87,6 @@ class EventDialog extends React.Component<EventProps, State> {
             </div>
           </div>
           <div className="event-dialog-controls">
-            <Button className="event-dialog-control">
-              <HeartIconOutline className="love" />
-            </Button>
             <Button
               className="event-dialog-control"
               onClick={this.props.onClose}
