@@ -32,6 +32,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start && npm run watch-css",
     "build": "react-scripts build",
+    "deploy": "npm run build && aws s3 sync build/ s3://priestly.app",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

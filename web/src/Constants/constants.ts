@@ -5,7 +5,7 @@ class Routes {
   account: string;
 
   constructor() {
-    this.base_route = "https://192.168.32.34:3011";
+    this.base_route = "https://192.168.1.2:3011";
     this.event = `${this.base_route}/events`;
     this.account = `${this.base_route}/accounts`;
   }
