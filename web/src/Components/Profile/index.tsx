@@ -1,13 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import UserIcon from "@material-ui/icons/PersonOutlined";
 import LocationIcon from "@material-ui/icons/PlaceOutlined";
-import accountService from "../../Services/Account/account.service";
+import SettingsIcon from "@material-ui/icons/Edit";
 import { Redirect } from "react-router";
+import { Map } from "../Map";
+import { IconButton } from "@material-ui/core";
 
 export class Profile extends React.Component<any> {
   constructor(props: any) {
     super(props);
+
+    this.getContent = this.getContent.bind(this);
   }
 
   getContent() {
@@ -17,20 +20,24 @@ export class Profile extends React.Component<any> {
     }
 
     return (
-      <div className="event-dialog-content">
-        <div className="event-content">
-          <div className={"event-dialog-photo"} />
-          <div className="event-info">
-            <div className="event-info__item">
-              <UserIcon className="event-item__icon user" />
-              <div>{this.props.account.name}</div>
+      <div className="profile">
+        <div className="profile-content">
+          <div className="profile-photo">
+          </div>
+          <div className="profile-info">
+            <div className="profile-info__name">
+              {account.name}
+              <IconButton className="profile-info__settings">
+                <SettingsIcon />
+              </IconButton>
             </div>
-            <div className="event-info__item location">
-              <LocationIcon className="event-item__icon" />
-              <div>{this.props.account.address}</div>
+            <div className="profile-info__address">
+              <LocationIcon className="location-icon" />
+              {account.address}
             </div>
           </div>
         </div>
+        <Map hideActions={true} center={{lat: account.lat, lng: account.lng}} />
       </div>
     );
   }

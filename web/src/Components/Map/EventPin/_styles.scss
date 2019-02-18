@@ -1,24 +1,18 @@
 .event-pin {
-    margin-top: -50px;
-    margin-left: -25px;
+    margin-top: -20px;
+    margin-left: -20px;
     position: relative;
+    background-color: $white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+    
     .event-pin__icon {
       position: absolute;
       cursor: pointer;
-      width: 50px;
-      height: 50px;
-      font: 50px;
-      color: $grey-1;
-    }
-  
-    .event-pin__icon-background {
-      position: absolute;
-      top: 3px;
-      left: 5px;
-      right: 0px;
       width: 40px;
       height: 40px;
-      background-color: $white;
-      border-radius: 50%;
+      font: 40px;
+      color: $grey-1;
     }
   }

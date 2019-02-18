@@ -48,8 +48,8 @@ export class Map extends React.Component<any, State> {
 
     this.state = {
       eventPins: [],
-      center: MAP.default_location,
-      zoom: 12,
+      center: this.props.center ? this.props.center : MAP.default_location,
+      zoom: this.props.hideActions ? 16 : 12,
       searchOpen: false,
       createEventOpen: false,
       loading: false
@@ -57,12 +57,13 @@ export class Map extends React.Component<any, State> {
 
     this.mapOptions = {
       disableDefaultUI: true,
-      gestureHandling: "greedy",
+      gestureHandling: this.props.hideActions ? "none" : "greedy",
       enableHighAccuracy: true
     };
 
     this.onMapChange = this.onMapChange.bind(this);
     this.isLoading = this.isLoading.bind(this);
+    this.getMapActions = this.getMapActions.bind(this);
     this.getEventPins = this.getEventPins.bind(this);
     this.setEventPins = this.setEventPins.bind(this);
     this.onCreateEventOpen = this.onCreateEventOpen.bind(this);
@@ -88,6 +89,19 @@ export class Map extends React.Component<any, State> {
     } else {
       return null;
     }
+  }
+
+  getMapActions() {
+    if(!this.props.hideActions) {
+      return (
+        <MapActionsContainer
+          onSearchOpen={this.onSearchOpen}
+          getMyLocation={this.getMyLocation}
+          onCreateEventOpen={this.onCreateEventOpen}
+        />
+      );
+    }
+    return null;
   }
 
   /* LOCATION */
@@ -178,11 +192,7 @@ export class Map extends React.Component<any, State> {
     return (
       <div className="map">
         {this.isLoading()}
-        <MapActionsContainer
-          onSearchOpen={this.onSearchOpen}
-          getMyLocation={this.getMyLocation}
-          onCreateEventOpen={this.onCreateEventOpen}
-        />
+        {this.getMapActions()}
         <SearchDialog
           open={this.state.searchOpen}
           onClose={this.onSearchClose}

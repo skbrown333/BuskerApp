@@ -17,7 +17,7 @@ function getCleanAccount(account) {
     name: account.name,
     lat: account.lat,
     lng: account.lng,
-    address: account.lng,
+    address: account.address,
     account_type: account.account_type
   };
 }

@@ -8,7 +8,7 @@ import { EventPinProps } from "./EventPin.interfaces";
 /* Services */
 
 /* Icons */
-import PersonPin from "@material-ui/icons/PersonPin";
+import PersonPin from "@material-ui/icons/AccountCircle";
 
 interface State {
   readonly open: boolean;
@@ -35,7 +35,6 @@ export class EventPin extends React.Component<EventPinProps, State> {
           open={this.state.open}
           event={this.props.event}
         />
-        <div className="event-pin__icon-background" />
         <PersonPin className="event-pin__icon" onClick={this.onClick} />
       </div>
     );

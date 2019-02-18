@@ -1,0 +1,95 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    background-color: $white;
+    border-radius: 2px;
+    height: calc(var(--vh, 1vh) * 100 - 70px);
+
+    @include respond-to(gt-sm) {
+        height: calc(var(--vh, 1vh) * 100 - 80px);
+    }
+
+    .profile-content {
+        width: 80%;
+        max-width: 1000px;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @include respond-to(gt-sm) {
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            background-color: $grey-2;
+            border-radius: 50%;
+            margin-right: unset;
+            margin-bottom: 25px;
+
+            @include respond-to(gt-sm) {
+                width: 150px;
+                height: 150px;
+                margin-right: 50px;
+                margin-bottom: unset;
+
+            }
+        }
+
+        .profile-info {
+            width: 100%;
+            align-self: flex-start;
+
+            @include respond-to(gt-sm) {
+                align-self: unset;
+                width: calc(100% - 200px);
+
+            }
+
+            .profile-info__name {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+                font-weight: bold;
+                font-size: 32px;
+                color: $black;
+            }
+
+            .profile-info__settings {
+                color: $grey-1;
+                margin-left: 12px;
+            }
+
+            .profile-info__address {
+                display: flex;
+                align-items: center;
+
+                .location-icon {
+                    margin-right: 8px;
+                    color: $grey-1;
+                }
+            }
+        }
+
+
+    }
+
+    .map {
+        width: 90%;
+        max-width: 1000px;
+        height: 300px;
+        margin-top: 42px;
+        margin-bottom: 25px;
+
+        @include respond-to(gt-sm) {
+            width: 80%;
+            height: 50vh;
+        }
+    }
+}
