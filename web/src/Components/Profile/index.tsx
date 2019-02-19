@@ -5,13 +5,21 @@ import SettingsIcon from "@material-ui/icons/Edit";
 import { Redirect } from "react-router";
 import { Map } from "../Map";
 import { IconButton } from "@material-ui/core";
+import AccountService from "../../Services/Account/account.service";
 
 export class Profile extends React.Component<any> {
+  readonly state: any;
+
   constructor(props: any) {
     super(props);
 
+    this.state = {
+      img: null
+    }
+
     this.getContent = this.getContent.bind(this);
   }
+
 
   getContent() {
     let account = this.props.account;
@@ -19,11 +27,13 @@ export class Profile extends React.Component<any> {
       return <Redirect to="/login" />;
     }
 
+    let accountId = account._id;
+    let img = AccountService.getPhoto(accountId);
+
     return (
       <div className="profile">
         <div className="profile-content">
-          <div className="profile-photo">
-          </div>
+          <img className="profile-photo" src={img} alt="" />
           <div className="profile-info">
             <div className="profile-info__name">
               {account.name}

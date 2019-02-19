@@ -17,6 +17,10 @@ class AccountService extends BaseService {
     let res = await axios.post(this.route + "/token", { token: token });
     return res.data;
   }
+
+  getPhoto(accountId: string) {
+    return this.route + "/" + accountId + "/photo";
+  }
 }
 
 export default new AccountService();

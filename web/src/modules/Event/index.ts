@@ -1,7 +1,7 @@
 export type Event = {
   _id: any;
   name: string;
-  account: string;
+  account: any;
   address: string;
   lat: number;
   lng: number;

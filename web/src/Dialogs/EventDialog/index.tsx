@@ -7,6 +7,7 @@ import HeartIcon from "@material-ui/icons/Favorite";
 import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
 import { Event } from "../../modules/Event";
+import accountService from "../../Services/Account/account.service";
 
 interface EventProps {
   onClose: any;
@@ -16,6 +17,7 @@ interface EventProps {
 
 interface State {
   readonly fullScreen: boolean;
+  readonly img: any;
 }
 
 class EventDialog extends React.Component<EventProps, State> {
@@ -25,7 +27,8 @@ class EventDialog extends React.Component<EventProps, State> {
   constructor(props: EventProps) {
     super(props);
     this.state = {
-      fullScreen: false
+      fullScreen: false,
+      img: accountService.getPhoto(this.props.event.account._id)
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -60,11 +63,11 @@ class EventDialog extends React.Component<EventProps, State> {
       >
         <div className="event-dialog-content">
           <div className="event-content">
-            <div className={"event-dialog-photo"} />
+            <img className={"event-dialog-photo"} src={this.state.img}/>
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />
-                <div>{this.props.event.account}</div>
+                <div>{this.props.event.account.name}</div>
               </div>
               <div className="event-info__item time">
                 <TimeIcon className="event-item__icon time" />

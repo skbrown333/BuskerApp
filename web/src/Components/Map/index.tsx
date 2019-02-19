@@ -136,9 +136,9 @@ export class Map extends React.Component<any, State> {
     try {
       let events = await EventService.getAll();
       await Promise.all(
-        events.map(async (event: Event) => {
+        events.map(async (event: any) => {
           let account = await AccountService.getById(event.account);
-          event.account = account.name;
+          event.account = account;
         })
       );
 
@@ -147,7 +147,7 @@ export class Map extends React.Component<any, State> {
   }
 
   setEventPins(events: Array<Event>) {
-    let eventPins = events.map((event: Event) => {
+    let eventPins = events.map((event: any) => {
       return (
         <EventPin
           key={event._id}

@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "aws s3 cp ../api s3://api.priestly.app/app --recursive --exclude=node_modules/* --include \"*.zip\""
+    "deploy": "aws s3 cp ../api s3://api.priestly.app/api --recursive --exclude=node_modules/* --include \"*.zip\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.405.0",
     "bcrypt": "3.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",

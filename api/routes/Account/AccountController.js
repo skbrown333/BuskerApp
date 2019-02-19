@@ -1,9 +1,11 @@
 const BaseController = require("../../base/BaseController");
 const Account = require("../../models/Account/Account");
+const AWS = require("aws-sdk");
 const utils = require("../../utils/utils");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const JWT_SECRET = process.env.JWT_SECRET;
+const s3 = new AWS.S3();
 
 class AccountController extends BaseController {
   constructor() {
@@ -109,6 +111,30 @@ class AccountController extends BaseController {
 
     let account = await Account.findById(accountId, cleanFields);
     return res.status(200).send(account);
+  }
+
+  async getPhoto(req, res, next) {
+    let accountId = req.params.id;
+    let data = await s3.getObject(
+      {
+        Bucket: "photos.priestly.app",
+        Key: accountId + ".png"
+      },
+      (err, data) => {
+        if (err) return next(new Error("Error Getting Photo"));
+        try {
+          let img = new Buffer(data.Body, "base64");
+
+          res.writeHead(200, {
+            "Content-Type": "image/png",
+            "Content-Length": img.length
+          });
+          res.end(img);
+        } catch (err) {
+          return next(new Error("Error Getting Photo"));
+        }
+      }
+    );
   }
 }
 
