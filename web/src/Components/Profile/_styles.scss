@@ -1,15 +1,11 @@
 .profile {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
     background-color: $white;
     border-radius: 2px;
-    height: calc(var(--vh, 1vh) * 100 - 70px);
-
-    @include respond-to(gt-sm) {
-        height: calc(var(--vh, 1vh) * 100 - 80px);
-    }
 
     .profile-content {
         width: 80%;

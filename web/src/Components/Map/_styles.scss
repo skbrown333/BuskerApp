@@ -2,18 +2,11 @@
 @import "./MapActions/styles";
 
 .map {
+    flex: 1;
     position: relative;
     padding: 5px;
-    height: calc(100vh - 10px); /* Fallback for browsers that do not support Custom Properties */
-    height: calc(var(--vh, 1vh) * 100 - 80px);
-    width: calc(100% - 10px);
     background-color: $white;
     border-radius: 2px;
-
-    @include respond-to(gt-sm) {
-        height: calc(100vh - 10px);
-        height: calc(var(--vh, 1vh) * 100 - 90px);
-    }
 
     div:nth-of-type(2) {
         div:first-of-type {
