@@ -14,7 +14,8 @@ const account = (state = {}, action) => {
         lat: account.lat,
         lng: account.lng,
         account_type: account.account_type,
-        is_active: account.is_active
+        is_active: account.is_active,
+        img: account.img
       };
     }
     default: {
