@@ -1,0 +1,17 @@
+.sidebar {
+    width: 200px;
+    margin-right: 5px;
+    background-color: $white;
+    border-radius: 2px;
+    margin-left: -205px;
+    transition: margin 400ms;
+
+    @include respond-to(gt-sm) {
+        display: block;
+   //     margin-left: 0px;
+    }
+}
+
+.show {
+  //  margin-left: 0px;
+}

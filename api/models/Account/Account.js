@@ -1,23 +1,39 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let Account = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
+let schemaOptions = {
+  toObject: {
+    virtuals: true
   },
-  name: {
-    type: String,
-    required: true
+  toJSON: {
+    virtuals: true
+  }
+};
+
+let Account = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    lat: { type: Number, default: null },
+    lng: { type: Number, default: null },
+    address: { type: String },
+    is_active: { type: Boolean, default: false },
+    account_type: { type: String, required: true },
+    hash: { type: String, required: true }
   },
-  lat: { type: Number, default: null },
-  lng: { type: Number, default: null },
-  address: { type: String },
-  is_active: { type: Boolean, default: false },
-  account_type: { type: String, required: true },
-  hash: { type: String, required: true }
+  schemaOptions
+);
+
+Account.virtual("img").get(function() {
+  return "https://s3.amazonaws.com/photos.priestly.app/" + this._id + ".png";
 });
 
 module.exports = mongoose.model("Account", Account);

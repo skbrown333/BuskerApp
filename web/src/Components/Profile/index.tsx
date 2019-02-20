@@ -13,10 +13,6 @@ export class Profile extends React.Component<any> {
   constructor(props: any) {
     super(props);
 
-    this.state = {
-      img: null
-    }
-
     this.getContent = this.getContent.bind(this);
   }
 
@@ -27,13 +23,10 @@ export class Profile extends React.Component<any> {
       return <Redirect to="/login" />;
     }
 
-    let accountId = account._id;
-    let img = AccountService.getPhoto(accountId);
-
     return (
       <div className="profile">
         <div className="profile-content">
-          <img className="profile-photo" src={img} alt="" />
+          <img className="profile-photo" src={account.img} alt="" />
           <div className="profile-info">
             <div className="profile-info__name">
               {account.name}

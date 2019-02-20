@@ -17,7 +17,6 @@ interface EventProps {
 
 interface State {
   readonly fullScreen: boolean;
-  readonly img: any;
 }
 
 class EventDialog extends React.Component<EventProps, State> {
@@ -28,7 +27,6 @@ class EventDialog extends React.Component<EventProps, State> {
     super(props);
     this.state = {
       fullScreen: false,
-      img: accountService.getPhoto(this.props.event.account._id)
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -50,6 +48,8 @@ class EventDialog extends React.Component<EventProps, State> {
   }
 
   render() {
+    let account = this.props.event.account;
+
     return (
       <Dialog
         onClose={this.handleClose}
@@ -63,7 +63,7 @@ class EventDialog extends React.Component<EventProps, State> {
       >
         <div className="event-dialog-content">
           <div className="event-content">
-            <img className={"event-dialog-photo"} src={this.state.img}/>
+            <img className={"event-dialog-photo"} src={account.img}/>
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />

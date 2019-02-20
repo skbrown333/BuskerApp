@@ -14,19 +14,3 @@
         }
     }
 }
-
-.loading-bar-container {
-    width: calc(100% - 10px);
-    height: 100%;
-    position: absolute;
-    z-index: 10;
-}
-
-.loading-bar {
-    position: absolute !important;
-    top: 0px !important;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 11;
-}

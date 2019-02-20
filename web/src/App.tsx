@@ -9,6 +9,7 @@ import { withCookies } from "react-cookie";
 import { connect } from "react-redux";
 import { updateAccount } from "./store/actions";
 import ProfileContainer from "./Components/Profile";
+import { Sidebar } from "./Components/Sidebar";
 
 export class App extends React.Component<any> {
   readonly state: any;
@@ -55,6 +56,11 @@ export class App extends React.Component<any> {
           <Route
             path="/"
             render={() => <Header cookies={this.props.cookies} />}
+          />
+          <Route
+            exact
+            path="/"
+            component={Sidebar}
           />
           <Route
             exact

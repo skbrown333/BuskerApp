@@ -70,11 +70,7 @@ export class Map extends React.Component<any, State> {
 
   isLoading() {
     if (this.state.loading) {
-      return (
-        <div className="loading-bar-container">
-          <LinearProgress className="loading-bar" color="primary" />
-        </div>
-      );
+      return <LinearProgress />;
     } else {
       return null;
     }
