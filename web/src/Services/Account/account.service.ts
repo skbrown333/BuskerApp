@@ -19,7 +19,7 @@ class AccountService extends BaseService {
   }
 
   getPhoto(accountId: string) {
-    return this.route + "/" + accountId + "/photo";
+    return this.route + "/" + accountId  + "/photo";
   }
 }
 

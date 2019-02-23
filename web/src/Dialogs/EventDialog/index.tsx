@@ -12,7 +12,7 @@ import accountService from "../../Services/Account/account.service";
 interface EventProps {
   onClose: any;
   open: boolean;
-  event: Event;
+  account: any;
 }
 
 interface State {
@@ -48,7 +48,7 @@ class EventDialog extends React.Component<EventProps, State> {
   }
 
   render() {
-    let account = this.props.event.account;
+    let account = this.props.account;
 
     return (
       <Dialog
@@ -67,25 +67,24 @@ class EventDialog extends React.Component<EventProps, State> {
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />
-                <div>{this.props.event.account.name}</div>
+                <div>{this.props.account.name}</div>
               </div>
               <div className="event-info__item time">
                 <TimeIcon className="event-item__icon time" />
                 <div>
-                  {this.props.event.start_time} - {this.props.event.end_time}
                 </div>
               </div>
               <div className="event-info__item location">
                 <LocationIcon className="event-item__icon" />
-                <div>{this.props.event.address}</div>
+                <div>{this.props.account.address}</div>
               </div>
             </div>
             <div className="event-dialog__description">
               <div className="event-description__title">
-                {this.props.event.name}:
+                Confession:
               </div>
               <div className="event-description__content">
-                {this.props.event.description}
+                
               </div>
             </div>
           </div>

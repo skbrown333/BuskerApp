@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { MAP } from "../../Constants/constants";
 
 /* Components */
@@ -53,7 +54,6 @@ export class Map extends React.Component<any, State> {
     this.onMapChange = this.onMapChange.bind(this);
     this.isLoading = this.isLoading.bind(this);
     this.getMapActions = this.getMapActions.bind(this);
-    this.getEventPins = this.getEventPins.bind(this);
     this.setEventPins = this.setEventPins.bind(this);
     this.onCreateEventOpen = this.onCreateEventOpen.bind(this);
     this.onCreateEventClose = this.onCreateEventClose.bind(this);
@@ -65,7 +65,7 @@ export class Map extends React.Component<any, State> {
 
   /* LIFE CYCLE */
   componentDidMount() {
-    this.getEventPins();
+    this.setEventPins();
   }
 
   isLoading() {
@@ -116,29 +116,15 @@ export class Map extends React.Component<any, State> {
     }
   }
 
-  /* EVENTS */
-  async getEventPins() {
-    try {
-      let events = await EventService.getAll();
-      await Promise.all(
-        events.map(async (event: any) => {
-          let account = await AccountService.getById(event.account);
-          event.account = account;
-        })
-      );
-
-      this.setEventPins(events);
-    } catch (err) {}
-  }
-
-  setEventPins(events: Array<Event>) {
-    let eventPins = events.map((event: any) => {
+  setEventPins() {
+    let accounts = this.props.accounts ? this.props.accounts : [];
+    let eventPins = accounts.map((account: any) => {
       return (
         <EventPin
-          key={event._id}
-          lat={event.lat}
-          lng={event.lng}
-          event={event}
+          key={account._id}
+          lat={account.lat}
+          lng={account.lng}
+          account={account}
         />
       );
     });
@@ -183,11 +169,11 @@ export class Map extends React.Component<any, State> {
           onClose={this.onSearchClose}
           search={this.onSearch}
         />
-        <CreateEventDialogContainer
+        {/* <CreateEventDialogContainer
           open={this.state.createEventOpen}
           addEvent={this.getEventPins}
           onClose={this.onCreateEventClose}
-        />
+        /> */}
         {/* @ts-ignore */}
         <GoogleMapReact
           ref="map"
@@ -208,3 +194,16 @@ export class Map extends React.Component<any, State> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    accounts: state.accounts,
+    filter: state.filter
+  };
+};
+
+export const MapContainer = connect(
+  mapStateToProps,
+)(Map);
+
+export default MapContainer;
