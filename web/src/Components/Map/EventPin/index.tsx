@@ -8,7 +8,6 @@ import { EventPinProps } from "./EventPin.interfaces";
 /* Services */
 
 /* Icons */
-import PersonPin from "@material-ui/icons/AccountCircle";
 
 interface State {
   readonly open: boolean;
@@ -20,9 +19,10 @@ export class EventPin extends React.Component<EventPinProps, State> {
   };
 
   componentDidMount() {
-    if(!this.props.event.account) return;
-    let account:any = this.props.event.account;
+    if(!this.props.account) return;
+    let account:any = this.props.account;
   }
+  
   onClick = () => {
     this.setState({ open: true });
   };
@@ -32,13 +32,13 @@ export class EventPin extends React.Component<EventPinProps, State> {
   };
 
   render() {
-    let account = this.props.event.account;
+    let account = this.props.account;
     return (
       <div className="event-pin">
         <EventDialog
           onClose={this.onClose}
           open={this.state.open}
-          event={this.props.event}
+          account={this.props.account}
         />
         <img className="event-pin__icon" src={account.img} alt="" onClick={this.onClick}/>
       </div>

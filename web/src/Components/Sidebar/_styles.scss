@@ -1,17 +1,43 @@
 .sidebar {
-    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
     margin-right: 5px;
     background-color: $white;
     border-radius: 2px;
     margin-left: -205px;
     transition: margin 400ms;
+    padding: 12px;
+    overflow-y: auto;
 
     @include respond-to(gt-sm) {
-        display: block;
-   //     margin-left: 0px;
+        margin-left: 0px;
     }
 }
 
 .show {
   //  margin-left: 0px;
+}
+
+.priest {
+  width: 100%;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+
+  .img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 8px;
+    background-color: $grey-2;
+  }
+
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

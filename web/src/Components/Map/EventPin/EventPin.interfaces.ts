@@ -1,7 +1,6 @@
-import { Event } from "../../../modules/Event";
 export interface EventPinProps {
-  event: Event;
-  lat: number;
-  lng: number;
+  lat: any;
+  lng: any;
+  account: any;
   key: any;
 }

@@ -1,15 +1,15 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import { Header } from "./Components/Header";
-import { Map } from "./Components/Map";
+import MapContainer from "./Components/Map";
 import LoginContainer from "./Components/Login";
 import AccountService from "./Services/Account/account.service";
 import { COOKIES } from "./Constants/constants";
 import { withCookies } from "react-cookie";
 import { connect } from "react-redux";
-import { updateAccount } from "./store/actions";
+import { updateAccount, updateAccounts } from "./store/actions";
 import ProfileContainer from "./Components/Profile";
-import { Sidebar } from "./Components/Sidebar";
+import SidebarContainer from "./Components/Sidebar";
 
 export class App extends React.Component<any> {
   readonly state: any;
@@ -26,6 +26,16 @@ export class App extends React.Component<any> {
 
   componentDidMount() {
     this.getAccount();
+    this.getAccounts();
+  }
+
+  async getAccounts() {
+    try {
+      let accounts = await AccountService.getAll();
+      this.props.updateAccounts(accounts);
+    } catch(err) {
+
+    }
   }
 
   async getAccount() {
@@ -60,14 +70,15 @@ export class App extends React.Component<any> {
           <Route
             exact
             path="/"
-            component={Sidebar}
+            component={SidebarContainer}
           />
           <Route
             exact
             path="/"
-            render={() => <Map cookies={this.props.cookies} />}
+            render={() => <MapContainer cookies={this.props.cookies} />}
           />
           <Route
+            exact
             path="/login"
             render={() => <LoginContainer cookies={this.props.cookies} />}
           />
@@ -91,7 +102,8 @@ const mapStateToProps = (state: any, ownProps: any) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  updateAccount: (account: any) => dispatch(updateAccount(account))
+  updateAccount: (account: any) => dispatch(updateAccount(account)),
+  updateAccounts: (accounts: any) => dispatch(updateAccounts(accounts))
 });
 
 export const AppContainer = connect(
