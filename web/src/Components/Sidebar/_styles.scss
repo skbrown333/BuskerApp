@@ -6,7 +6,7 @@
     margin-right: 5px;
     background-color: $white;
     border-radius: 2px;
-    margin-left: -205px;
+  //  margin-left: -205px;
     transition: margin 400ms;
     padding: 12px;
     overflow-y: auto;
@@ -26,6 +26,12 @@
   display: flex;
   align-items: center;
   padding: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: #e6f6fd;
+  }
 
   .img {
     width: 35px;
@@ -36,6 +42,7 @@
   }
 
   .name {
+    text-transform: capitalize;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

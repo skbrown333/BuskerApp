@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
+
 import { Header } from "./Components/Header";
 import MapContainer from "./Components/Map";
 import LoginContainer from "./Components/Login";
@@ -17,10 +18,12 @@ export class App extends React.Component<any> {
     super(props);
 
     this.state = {
-      loading: true
+      loadingAccount: true,
+      loadingAccounts: true,
     };
 
     this.getAccount = this.getAccount.bind(this);
+    this.getAccounts = this.getAccounts.bind(this);
     this.getContent = this.getContent.bind(this);
   }
 
@@ -33,8 +36,9 @@ export class App extends React.Component<any> {
     try {
       let accounts = await AccountService.getAll();
       this.props.updateAccounts(accounts);
+      this.setState({ loadingAccounts: false });
     } catch(err) {
-
+      this.setState({ loadingAccounts: false });
     }
   }
 
@@ -42,25 +46,25 @@ export class App extends React.Component<any> {
     let cookies = this.props.cookies;
     let token = cookies.get(COOKIES.token);
     if (!token) {
-      this.setState({ loading: false });
+      this.setState({ loadingAccount: false });
       return;
     }
     try {
       let data = await AccountService.authenticateByToken(token);
       if (!data.token) {
-        this.setState({ loading: false });
+        this.setState({ loadingAccount: false });
         return;
       }
       cookies.set(COOKIES.token, data.token, { secure: true });
       this.props.updateAccount(data.account);
-      this.setState({ loading: false });
+      this.setState({ loadingAccount: false });
     } catch {
       console.log("Error getting account");
     }
   }
 
   getContent() {
-    if (!this.state.loading) {
+    if (!this.state.loadingAccount && !this.state.loadingAccounts) {
       return (
         <div className="app">
           <Route
@@ -82,7 +86,10 @@ export class App extends React.Component<any> {
             path="/login"
             render={() => <LoginContainer cookies={this.props.cookies} />}
           />
-          <Route exact path="/profile" component={ProfileContainer} />
+          <Route 
+            exact 
+            path="/profile" 
+            render={() => <ProfileContainer cookies={this.props.cookies} />} />
         </div>
       );
     }

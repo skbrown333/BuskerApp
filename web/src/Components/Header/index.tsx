@@ -10,15 +10,17 @@ export class Header extends React.Component<any, {}> {
   render() {
     return (
       <div id="header" className="header">
-        <IconButton>
+        <IconButton className="link">
           <Link to="/">
             <GlobeIcon className="header-icon selected" />
           </Link>
         </IconButton>
-        <IconButton>
-          <EventIcon className="header-icon" />
+        <IconButton className="link">
+          <Link to="/">
+            <EventIcon className="header-icon" />
+          </Link>
         </IconButton>
-        <IconButton>
+        <IconButton className="link">
           <Link to="/profile">
             <PersonIcon className="header-icon" />
           </Link>

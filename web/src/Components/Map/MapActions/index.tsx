@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import LocationIcon from "@material-ui/icons/MyLocation";
 import SearchIcon from "@material-ui/icons/Search";
-import BuildingIcon from "@material-ui/icons/Domain";
 import CreateIcon from "@material-ui/icons/Create";
 import Tooltip from "@material-ui/core/Tooltip";
-import { MapActionProps } from "./MapAction.interfaces";
 
 export class MapActions extends React.Component<any> {
   constructor(props: any) {
@@ -75,7 +73,7 @@ export class MapActions extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: any) => {
   return {
     account: state.account
   };

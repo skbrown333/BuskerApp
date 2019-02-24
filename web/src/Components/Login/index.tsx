@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import { InputPassword } from "../Inputs/InputPassword";
 import AccountService from "../../Services/Account/account.service";
 import { COOKIES } from "../../Constants/constants";
-import { updateAccount } from "../../modules/Actions";
+import { updateAccount } from "../../store/actions";
 
 interface State {
   readonly email: string;
@@ -50,7 +50,8 @@ export class Login extends React.Component<any, State> {
       this.props.cookies.set(COOKIES.token, data.token, { secure: true });
       this.props.updateAccount(data.account);
       window.location.replace("/");
-    } catch {
+    } catch (err) {
+      console.log('err: ', err);
       console.log("Error Logging in");
     }
   }
@@ -73,7 +74,6 @@ export class Login extends React.Component<any, State> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  console.log(state);
   return {
     state: state,
     cookies: ownProps.cookies
@@ -88,4 +88,5 @@ export const LoginContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
+
 export default LoginContainer;

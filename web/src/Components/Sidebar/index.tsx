@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { SearchInput } from "../Inputs/SearchInput";
-import { updateFilter } from "../../store/actions";
+import { updateFilter, updateCenter } from "../../store/actions";
 
 export class Sidebar extends React.Component<any>{
     readonly state: any;
@@ -43,7 +43,12 @@ export class Sidebar extends React.Component<any>{
             }
 
             accountRows.push(
-                <div className="priest" key={account._id}>
+                <div 
+                    className="priest" 
+                    key={account._id} 
+                    onClick={() => {
+                        this.props.updateCenter({lat: account.lat, lng: account.lng})
+                    }}>
                     <img className="img" src={account.img} alt="" />
                     <div className="name">{account.name}</div>
                 </div>
@@ -64,7 +69,7 @@ export class Sidebar extends React.Component<any>{
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: any) => {
     return {
       accounts: state.accounts,
     };
@@ -72,11 +77,13 @@ const mapStateToProps = (state: any, ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: any) => ({
     updateFilter: (filter: string) => dispatch(updateFilter(filter)),
-  });
+    updateCenter: (center: any) => dispatch(updateCenter(center))
+});
   
   export const SidebarContainer = connect(
     mapStateToProps,
     mapDispatchToProps,
   )(Sidebar);
+
 
   export default SidebarContainer;

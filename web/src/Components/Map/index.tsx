@@ -1,21 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { MAP } from "../../Constants/constants";
 
 /* Components */
 import GoogleMapReact from "google-map-react";
 import { EventPin } from "./EventPin";
 import MapActionsContainer from "./MapActions";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { Event } from "../../modules/Event";
 
 /* Dialogs */
 import SearchDialog from "../../Dialogs/SearchDialog";
 import CreateEventDialogContainer from "../../Dialogs/CreateEventDialog";
 
+import { updateCenter } from "../../store/actions";
+
 /* Services */
-import EventService from "../../Services/Event/event.service";
-import AccountService from "../../Services/Account/account.service";
 
 const API_KEY: any = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
@@ -38,7 +36,7 @@ export class Map extends React.Component<any, State> {
 
     this.state = {
       eventPins: [],
-      center: this.props.center ? this.props.center : MAP.default_location,
+      center: this.props.center,
       zoom: this.props.hideActions ? 16 : 12,
       searchOpen: false,
       createEventOpen: false,
@@ -91,7 +89,8 @@ export class Map extends React.Component<any, State> {
 
   /* LOCATION */
   onMapChange(properties: any) {
-    this.setState({ center: properties.center, zoom: properties.zoom });
+    this.props.updateCenter(properties.center);
+    this.setState({zoom: properties.zoom });
   }
 
   getMyLocation() {
@@ -106,7 +105,8 @@ export class Map extends React.Component<any, State> {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          this.setState({ center: myLocation, loading: false, zoom: 14 });
+          this.props.updateCenter(myLocation);
+          this.setState({loading: false, zoom: 14 });
         },
         error => {
           this.setState({ loading: false });
@@ -117,7 +117,7 @@ export class Map extends React.Component<any, State> {
   }
 
   setEventPins() {
-    let accounts = this.props.accounts ? this.props.accounts : [];
+    let accounts = this.props.accounts || [];
     let eventPins = accounts.map((account: any) => {
       return (
         <EventPin
@@ -156,7 +156,8 @@ export class Map extends React.Component<any, State> {
       lng: data[0].geometry.location.lng()
     };
 
-    this.setState({ center: _center, zoom: 14, searchOpen: false });
+    this.props.updateCenter(_center);
+    this.setState({zoom: 14, searchOpen: false });
   }
 
   render() {
@@ -182,7 +183,7 @@ export class Map extends React.Component<any, State> {
             lat: 43.079,
             lng: -89.386408
           }}
-          center={this.state.center}
+          center={this.props.center}
           zoom={this.state.zoom}
           defaultZoom={11}
           onChange={this.onMapChange}
@@ -195,15 +196,22 @@ export class Map extends React.Component<any, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   return {
     accounts: state.accounts,
-    filter: state.filter
+    center: ownProps.center ? ownProps.center : state.center,
+    cookies: ownProps.cookies
   };
 };
 
+const mapDispatchToProps = (dispatch: any) => ({
+  updateCenter: (center: any) => dispatch(updateCenter(center))
+});
+
 export const MapContainer = connect(
   mapStateToProps,
+  mapDispatchToProps
 )(Map);
+
 
 export default MapContainer;

@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import LocationIcon from "@material-ui/icons/PlaceOutlined";
 import SettingsIcon from "@material-ui/icons/Edit";
 import { Redirect } from "react-router";
-import { Map } from "../Map";
+import MapContainer from "../Map";
 import { IconButton } from "@material-ui/core";
-import AccountService from "../../Services/Account/account.service";
 
-export class Profile extends React.Component<any> {
+export class Profile extends React.Component<any, any> {
   readonly state: any;
 
   constructor(props: any) {
@@ -40,7 +39,7 @@ export class Profile extends React.Component<any> {
             </div>
           </div>
         </div>
-        <Map hideActions={true} center={{lat: account.lat, lng: account.lng}} />
+        <MapContainer hideActions={true} center={{lat: account.lat, lng: account.lng}} />
       </div>
     );
   }
@@ -50,11 +49,13 @@ export class Profile extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    account: state.account
+    account: state.account,
+    cookies: ownProps.cookies
   };
 };
 
 export const ProfileContainer = connect(mapStateToProps)(Profile);
+
 export default ProfileContainer;
