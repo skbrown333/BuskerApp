@@ -1,4 +1,6 @@
 export const ACCOUNT_ACTION = "AccountAction";
+export const ALL_EVENTS_ACTION = "AllEventsAction";
+export const ADD_EVENT_ACTION = "AddEventAction";
 export const ALL_ACCOUNTS_ACTION = "AllAccountsAction";
 export const UPDATE_FILTER_ACTION = "UpdateFilterAction";
 export const UPDATE_CENTER_ACTION = "UpdateCenterAction";
@@ -20,7 +22,21 @@ export function updateAccount(account: any) {
 export function updateAccounts(accounts: any) {
   return {
     type: ALL_ACCOUNTS_ACTION,
-    payload: accounts 
+    payload: accounts
+  };
+}
+
+export function updateEvents(events: any) {
+  return {
+    type: ALL_EVENTS_ACTION,
+    payload: events 
+  }
+}
+
+export function addEvent(event: any) {
+  return {
+    type: ADD_EVENT_ACTION,
+    payload: event 
   }
 }
 

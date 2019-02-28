@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import EventService from "../../Services/Event/event.service";
+import { addEvent } from "../../store/actions";
 
 // @ts-ignore
 const google = window.google;
@@ -98,8 +99,9 @@ export class CreateEventDialog extends React.Component<any, State> {
     };
 
     try {
-      await EventService.create(options);
-      this.props.addEvent();
+      let event = await EventService.create(options);
+      this.props.addEvent(event);
+      this.props.updateEvents();
       this.props.onClose();
     } catch (err) {
       console.log(err);
@@ -180,8 +182,12 @@ const mapStateToProps = (state: any, ownProps: any) => {
   };
 };
 
+const mapDispatchToProps = (dispatch: any) => ({
+  addEvent: (event: any) => dispatch(addEvent(event))
+});
+
 export const CreateEventDialogContainer = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CreateEventDialog);
 export default CreateEventDialogContainer;

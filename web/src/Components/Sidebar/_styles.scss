@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 200px;
     max-width: 200px;
     margin-right: 5px;
     background-color: $white;
     border-radius: 2px;
-  //  margin-left: -205px;
+    margin-left: -229px;
     transition: margin 400ms;
     padding: 12px;
     overflow-y: auto;
@@ -14,13 +15,17 @@
     @include respond-to(gt-sm) {
         margin-left: 0px;
     }
+
+    .search-input {
+      margin: 8px 0;
+    }
 }
 
 .show {
   //  margin-left: 0px;
 }
 
-.priest {
+.event {
   width: 100%;
   min-height: 30px;
   display: flex;

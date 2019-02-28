@@ -16,7 +16,7 @@ export class MapActions extends React.Component<any> {
   isPriest() {
     let account = this.props.account;
 
-    if (account && account.account_type === "priest") {
+    if (account) {
       return (
         <Tooltip
           title="Create Event"

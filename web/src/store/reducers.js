@@ -19,7 +19,21 @@ const center = (state = {}, action) => {
   }
 };
 
-const accounts = (state = [], action) => {
+const events = (state = [], action) => {
+  let events;
+  switch (action.type) {
+    case Actions.ALL_EVENTS_ACTION:
+      events = action.payload;
+      return state.concat(events);
+    case Actions.ADD_EVENT_ACTION:
+      events = [action.payload];
+      return [action.payload].concat(state);
+    default:
+      return state;
+  }
+};
+
+const accounts = (state = {}, action) => {
   switch (action.type) {
     case Actions.ALL_ACCOUNTS_ACTION:
       let accounts = action.payload;
@@ -45,4 +59,11 @@ const toast = (state = [], action) => {
   }
 };
 
-export default combineReducers({ account, accounts, center, filter, toast });
+export default combineReducers({
+  account,
+  accounts,
+  events,
+  center,
+  filter,
+  toast
+});

@@ -1,4 +1,6 @@
 import * as React from "react";
+import SearchIcon from "@material-ui/icons/Search";
+
 
 interface State {
   readonly value: string;
@@ -20,12 +22,15 @@ export class SearchInput extends React.Component<InputProps, State> {
 
   render() {
     return (
+      <div className="search-input">
+        <SearchIcon className="__icon" />
         <input 
             type="text" 
-            className="search-input" 
+            className="__input" 
             onChange={this.props.onChange} 
             placeholder={this.props.placeHolder}>
         </input>
+      </div>
     );
   }
 }

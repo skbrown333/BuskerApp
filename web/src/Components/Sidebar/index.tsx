@@ -14,7 +14,7 @@ export class Sidebar extends React.Component<any>{
             filter: ""
         }
 
-        this.getPriests = this.getPriests.bind(this);
+        this.getEvents = this.getEvents.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -33,29 +33,30 @@ export class Sidebar extends React.Component<any>{
         this.props.updateFilter(filter);
     }
 
-    getPriests() {
-        let accountRows = [];
+    getEvents() {
+        let eventRows = [];
         let accounts = this.props.accounts;
-        for(var i = 0; i < accounts.length; i++) {
-            let account = accounts[i];
-            if(!account.name.toLowerCase().includes(this.state.filter)) {
+        let events = this.props.events;
+        for(var i = 0; i < events.length; i++) {
+            let event = events[i];
+            if(!event.name.toLowerCase().includes(this.state.filter)) {
                 continue;
             }
 
-            accountRows.push(
+            eventRows.push(
                 <div 
-                    className="priest" 
-                    key={account._id} 
+                    className="event" 
+                    key={event._id} 
                     onClick={() => {
-                        this.props.updateCenter({lat: account.lat, lng: account.lng})
+                        this.props.updateCenter({lat: event.lat, lng: event.lng})
                     }}>
-                    <img className="img" src={account.img} alt="" />
-                    <div className="name">{account.name}</div>
+                    <img className="img" src={event.img} alt="" />
+                    <div className="name">{event.name}</div>
                 </div>
             )
         }
 
-        return accountRows;
+        return eventRows;
 
     }
 
@@ -63,7 +64,7 @@ export class Sidebar extends React.Component<any>{
         return (
             <div id="sidebar" className="sidebar">
                 <SearchInput placeHolder={"Search"} onChange={this.handleChange} />
-                {this.getPriests()}
+                {this.getEvents()}
             </div>
         );
     }
@@ -72,6 +73,7 @@ export class Sidebar extends React.Component<any>{
 const mapStateToProps = (state: any) => {
     return {
       accounts: state.accounts,
+      events: state.events,
     };
 };
 

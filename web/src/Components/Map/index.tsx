@@ -12,6 +12,7 @@ import SearchDialog from "../../Dialogs/SearchDialog";
 import CreateEventDialogContainer from "../../Dialogs/CreateEventDialog";
 
 import { updateCenter } from "../../store/actions";
+import { array } from "prop-types";
 
 /* Services */
 
@@ -117,14 +118,20 @@ export class Map extends React.Component<any, State> {
   }
 
   setEventPins() {
+    let events = this.props.events || [];
     let accounts = this.props.accounts || [];
-    let eventPins = accounts.map((account: any) => {
+    let eventPins = events.map((event: any) => {
+      accounts.forEach((account:any) => {
+        if(account._id === event.account) {
+          event.account = account;
+        }
+      });
       return (
         <EventPin
-          key={account._id}
-          lat={account.lat}
-          lng={account.lng}
-          account={account}
+          key={event._id}
+          lat={event.lat}
+          lng={event.lng}
+          event={event}
         />
       );
     });
@@ -170,11 +177,11 @@ export class Map extends React.Component<any, State> {
           onClose={this.onSearchClose}
           search={this.onSearch}
         />
-        {/* <CreateEventDialogContainer
+        <CreateEventDialogContainer
           open={this.state.createEventOpen}
-          addEvent={this.getEventPins}
+          updateEvents={this.setEventPins}
           onClose={this.onCreateEventClose}
-        /> */}
+        />
         {/* @ts-ignore */}
         <GoogleMapReact
           ref="map"
@@ -198,6 +205,7 @@ export class Map extends React.Component<any, State> {
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
+    events: state.events,
     accounts: state.accounts,
     center: ownProps.center ? ownProps.center : state.center,
     cookies: ownProps.cookies

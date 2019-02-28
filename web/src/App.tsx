@@ -4,11 +4,12 @@ import { Route } from "react-router-dom";
 import { Header } from "./Components/Header";
 import MapContainer from "./Components/Map";
 import LoginContainer from "./Components/Login";
+import EventService from "./Services/Event/event.service";
 import AccountService from "./Services/Account/account.service";
 import { COOKIES } from "./Constants/constants";
 import { withCookies } from "react-cookie";
 import { connect } from "react-redux";
-import { updateAccount, updateAccounts } from "./store/actions";
+import { updateAccount, updateAccounts, updateEvents } from "./store/actions";
 import ProfileContainer from "./Components/Profile";
 import SidebarContainer from "./Components/Sidebar";
 
@@ -20,16 +21,29 @@ export class App extends React.Component<any> {
     this.state = {
       loadingAccount: true,
       loadingAccounts: true,
+      loadingEvents: true,
     };
 
     this.getAccount = this.getAccount.bind(this);
     this.getAccounts = this.getAccounts.bind(this);
+    this.getEvents = this.getEvents.bind(this);
     this.getContent = this.getContent.bind(this);
   }
 
   componentDidMount() {
     this.getAccount();
     this.getAccounts();
+    this.getEvents();
+  }
+
+  async getEvents() {
+    try {
+      let events = await EventService.getAll();
+      this.props.updateEvents(events);
+      this.setState({ loadingEvents: false });
+    } catch(err) {
+      this.setState({ loadingEvents: false });
+    }
   }
 
   async getAccounts() {
@@ -64,7 +78,7 @@ export class App extends React.Component<any> {
   }
 
   getContent() {
-    if (!this.state.loadingAccount && !this.state.loadingAccounts) {
+    if (!this.state.loadingAccount && !this.state.loadingEvents && !this.state.loadingAccounts) {
       return (
         <div className="app">
           <Route
@@ -110,7 +124,8 @@ const mapStateToProps = (state: any, ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: any) => ({
   updateAccount: (account: any) => dispatch(updateAccount(account)),
-  updateAccounts: (accounts: any) => dispatch(updateAccounts(accounts))
+  updateAccounts: (accounts: any) => dispatch(updateAccounts(accounts)),
+  updateEvents: (events: any) => dispatch(updateEvents(events))
 });
 
 export const AppContainer = connect(
