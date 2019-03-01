@@ -4,7 +4,7 @@
   border-radius: 50px;
   border: none;
   padding: 12px;
-  width: 150px;
+  width: 175px;
   background-color: #e8e8e8;
   margin-bottom: 12px;
   font-size: 14px;
@@ -22,13 +22,11 @@
   .__input {
     background-color: #e8e8e8;
     font-size: 14px;
-    width: 100px;
+    width: 150px;
     border: none;
 
     &:focus {
       outline: none;
     }
   }
-  
-
-  }
+}

@@ -16,7 +16,7 @@ export class MapActions extends React.Component<any> {
   isPriest() {
     let account = this.props.account;
 
-    if (account) {
+    if (Object.keys(account).length > 0) {
       return (
         <Tooltip
           title="Create Event"

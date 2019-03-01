@@ -24,7 +24,6 @@ body {
   background-color: $grey-2;
   flex: 1;
   display: flex;
-
 }
 
 .pac-container {
@@ -33,7 +32,7 @@ body {
   //  left: 0 !important;
   //  margin-left: auto;
   //  margin-right: auto;
-  margin-top: 12px;
+  margin-top: 8px;
   //  width: 100% !important;
   border-top: none;
   box-shadow: none;
@@ -60,11 +59,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
   margin: 5px 5px 65px 5px;
 
   @include respond-to(gt-sm) {
     margin: 75px 5px 5px 5px;
-
   }
 }

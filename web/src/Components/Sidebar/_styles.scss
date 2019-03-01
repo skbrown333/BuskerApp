@@ -1,24 +1,24 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    max-width: 200px;
-    margin-right: 5px;
-    background-color: $white;
-    border-radius: 2px;
-    margin-left: -229px;
-    transition: margin 400ms;
-    padding: 12px;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  max-width: 200px;
+  margin-right: 5px;
+  background-color: $white;
+  border-radius: 2px;
+  margin-left: -229px;
+  transition: margin 400ms;
+  padding: 12px;
+  overflow-y: auto;
 
-    @include respond-to(gt-sm) {
-        margin-left: 0px;
-    }
+  @include respond-to(gt-sm) {
+    margin-left: 0px;
+  }
 
-    .search-input {
-      margin: 8px 0;
-    }
+  .search-input {
+    margin: 8px 0;
+  }
 }
 
 .show {
@@ -41,6 +41,8 @@
   .img {
     width: 35px;
     height: 35px;
+    min-width: 35px;
+    min-height: 35px;
     border-radius: 50%;
     margin: 8px;
     background-color: $grey-2;

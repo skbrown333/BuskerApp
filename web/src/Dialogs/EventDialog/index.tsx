@@ -26,7 +26,7 @@ class EventDialog extends React.Component<EventProps, State> {
   constructor(props: EventProps) {
     super(props);
     this.state = {
-      fullScreen: false,
+      fullScreen: false
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -34,6 +34,7 @@ class EventDialog extends React.Component<EventProps, State> {
   }
 
   handleOpen() {
+    // @ts-ignore
     this.resizeListener = window.addEventListener("resize", this.resize);
     this.resize();
   }
@@ -63,17 +64,18 @@ class EventDialog extends React.Component<EventProps, State> {
       >
         <div className="event-dialog-content">
           <div className="event-content">
-            <img className={"event-dialog-photo"} src={event.img}/>
+            <img className={"event-dialog-photo"} src={event.img} />
             <div className="event-info">
               <div className="event-info__item">
                 <UserIcon className="event-item__icon user" />
-                <div>{event.account.name}</div>
+                <div>
+                  {event.account.first_name} {event.account.last_name}
+                </div>
               </div>
               <div className="event-info__item time">
                 <TimeIcon className="event-item__icon time" />
                 {event.start_time} - {event.end_time}
-                <div>
-                </div>
+                <div />
               </div>
               <div className="event-info__item location">
                 <LocationIcon className="event-item__icon" />
@@ -81,9 +83,7 @@ class EventDialog extends React.Component<EventProps, State> {
               </div>
             </div>
             <div className="event-dialog__description">
-              <div className="event-description__title">
-                {event.name}:
-              </div>
+              <div className="event-description__title">{event.name}:</div>
               <div className="event-description__content">
                 {event.description}
               </div>
