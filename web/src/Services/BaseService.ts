@@ -20,7 +20,7 @@ export class BaseService {
   async create(options: Object) {
     try {
       let res = await axios.post(this.route + "/create", options);
-      return res;
+      return res.data.model;
     } catch (err) {
       console.error();
     }

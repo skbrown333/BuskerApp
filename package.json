@@ -1,5 +1,5 @@
 {
-  "name": "priestly",
+  "name": "event-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skbrown333/Priestly.git"
+    "url": "git+https://github.com/skbrown333/EventApp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/skbrown333/Priestly/issues"
+    "url": "https://github.com/skbrown333/EventApp/issues"
   },
-  "homepage": "https://github.com/skbrown333/Priestly#readme"
+  "homepage": "https://github.com/skbrown333/EventApp#readme"
 }

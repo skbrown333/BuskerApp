@@ -6,6 +6,33 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const JWT_SECRET = process.env.JWT_SECRET;
 const s3 = new AWS.S3();
+const multiparty = require("multiparty");
+const bluebird = require("bluebird");
+const fs = require("fs");
+const fileType = require("file-type");
+
+AWS.config.setPromisesDependency(bluebird);
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID_1,
+
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_1
+});
+console.log(
+  "process.env.AWS_SECRET_ACCESS_KEY: ",
+  process.env.AWS_SECRET_ACCESS_KEY_1
+);
+console.log("process.env.AWS_ACCESS_KEY_ID: ", process.env.AWS_ACCESS_KEY_ID_1);
+const uploadFile = (buffer, name, type) => {
+  const params = {
+    ACL: "public-read",
+    Body: buffer,
+    Bucket: "photos.priestly.app",
+    Region: "us-east-2",
+    ContentType: type.mime,
+    Key: `${name}.${type.ext}`
+  };
+  return s3.upload(params).promise();
+};
 
 class AccountController extends BaseController {
   constructor() {
@@ -85,7 +112,8 @@ class AccountController extends BaseController {
    */
   async getAll(req, res) {
     let cleanFields = {
-      name: 1,
+      first_name: 1,
+      last_name: 1,
       lat: 1,
       lng: 1,
       address: 1,
@@ -135,6 +163,25 @@ class AccountController extends BaseController {
         }
       }
     );
+  }
+
+  async uploadPhoto(req, res, next) {
+    const form = new multiparty.Form();
+    form.parse(req, async (error, fields, files) => {
+      if (error) throw new Error(error);
+      try {
+        const path = files.file[0].path;
+        const buffer = fs.readFileSync(path);
+        const type = fileType(buffer);
+        const timestamp = Date.now().toString();
+        const fileName = `${timestamp}-lg`;
+        const data = await uploadFile(buffer, fileName, type);
+        return res.status(200).send(data);
+      } catch (error) {
+        console.log("error: ", error);
+        return res.status(400).send(error);
+      }
+    });
   }
 }
 

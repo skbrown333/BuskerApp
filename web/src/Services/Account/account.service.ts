@@ -19,7 +19,16 @@ class AccountService extends BaseService {
   }
 
   getPhoto(accountId: string) {
-    return this.route + "/" + accountId  + "/photo";
+    return this.route + "/" + accountId + "/photo";
+  }
+
+  async uploadPhoto(photo: any) {
+    let res = await axios.post(this.route + "/photo", photo, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+    return res.data;
   }
 }
 

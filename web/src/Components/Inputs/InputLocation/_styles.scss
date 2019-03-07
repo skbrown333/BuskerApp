@@ -1,0 +1,18 @@
+.input-location {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .input-valid {
+    border-bottom-color: $green;
+    background-color: $white;
+  }
+
+  .input-invalid {
+    border-bottom-color: $red;
+    background-color: $white;
+  }
+}

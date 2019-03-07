@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 function generateToken(account) {
   if (!account) return null;
   let u = {
-    name: account.name,
+    first_name: account.first_name,
+    last_name: account.last_name,
     email: account.email,
     _id: account._id.toString()
   };
@@ -14,7 +15,8 @@ function getCleanAccount(account) {
   return {
     _id: account._id,
     email: account.email,
-    name: account.name,
+    first_name: account.first_name,
+    last_name: account.last_name,
     lat: account.lat,
     lng: account.lng,
     address: account.address,

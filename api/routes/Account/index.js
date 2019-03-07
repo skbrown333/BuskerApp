@@ -10,5 +10,6 @@ routes.post("/token", wrapAsync(Controller.getFromToken));
 routes.get("/", wrapAsync(Controller.getAll));
 routes.get("/:id", wrapAsync(Controller.getById));
 routes.get("/:id/photo", wrapAsync(Controller.getPhoto));
+routes.post("/photo", wrapAsync(Controller.uploadPhoto));
 
 module.exports = routes;

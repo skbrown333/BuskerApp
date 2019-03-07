@@ -15,7 +15,6 @@ export class Profile extends React.Component<any, any> {
     this.getContent = this.getContent.bind(this);
   }
 
-
   getContent() {
     let account = this.props.account;
     if (!account || !account._id) {
@@ -28,7 +27,7 @@ export class Profile extends React.Component<any, any> {
           <img className="profile-photo" src={account.img} alt="" />
           <div className="profile-info">
             <div className="profile-info__name">
-              {account.name}
+              {account.first_name} {account.last_name}
               <IconButton className="profile-info__settings">
                 <SettingsIcon />
               </IconButton>
@@ -39,7 +38,10 @@ export class Profile extends React.Component<any, any> {
             </div>
           </div>
         </div>
-        <MapContainer hideActions={true} center={{lat: account.lat, lng: account.lng}} />
+        <MapContainer
+          hideActions={true}
+          center={{ lat: account.lat, lng: account.lng }}
+        />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 export interface EventPinProps {
   lat: any;
   lng: any;
-  account: any;
+  event: any;
   key: any;
 }

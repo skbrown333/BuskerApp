@@ -18,7 +18,11 @@ let Account = new Schema(
       unique: true,
       trim: true
     },
-    name: {
+    first_name: {
+      type: String,
+      required: true
+    },
+    last_name: {
       type: String,
       required: true
     },
@@ -26,7 +30,7 @@ let Account = new Schema(
     lng: { type: Number, default: null },
     address: { type: String },
     is_active: { type: Boolean, default: false },
-    account_type: { type: String, required: true },
+    account_type: { type: String, required: true, default: "normal" },
     hash: { type: String, required: true }
   },
   schemaOptions

@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import EventService from "../../Services/Event/event.service";
+import { addEvent } from "../../store/actions";
+import { InputLocation } from "../../Components/Inputs/InputLocation";
+import { Input } from "../../Components/Inputs/Input";
+import AccountService from "../../Services/Account/account.service";
 
-// @ts-ignore
-const google = window.google;
 interface CreateEventProps {
   addEvent: any;
   onClose: any;
@@ -52,19 +54,10 @@ export class CreateEventDialog extends React.Component<any, State> {
   handleOpen() {
     this.resizeListener = window.addEventListener("resize", this.resize);
     this.resize();
-
-    let input = ReactDOM.findDOMNode(this.refs.input);
-
-    this.searchBar = new google.maps.places.SearchBox(input);
-    this.searchBarListener = this.searchBar.addListener(
-      "places_changed",
-      this.onPlacesChanged
-    );
   }
 
   handleClose() {
     window.removeEventListener("resize", this.resizeListener);
-    google.maps.event.removeListener(this.searchBarListener);
     this.props.onClose();
   }
 
@@ -72,17 +65,12 @@ export class CreateEventDialog extends React.Component<any, State> {
     this.setState({ fullScreen: window.innerWidth <= 760 });
   }
 
-  onPlacesChanged() {
-    this.searchBar.getPlaces();
-    let data = this.searchBar.getPlaces();
-
-    if (!data || !data.length) return;
-
-    let lat = data[0].geometry.location.lat();
-    let lng = data[0].geometry.location.lng();
-    let address = data[0].formatted_address;
-
-    this.setState({ lat: lat, lng: lng, address: address });
+  onPlacesChanged(location: any) {
+    this.setState({
+      lat: location.lat,
+      lng: location.lng,
+      address: location.address
+    });
   }
 
   async createEvent() {
@@ -98,8 +86,9 @@ export class CreateEventDialog extends React.Component<any, State> {
     };
 
     try {
-      await EventService.create(options);
-      this.props.addEvent();
+      let event = await EventService.create(options);
+      this.props.addEvent(event);
+      this.props.updateEvents();
       this.props.onClose();
     } catch (err) {
       console.log(err);
@@ -123,34 +112,45 @@ export class CreateEventDialog extends React.Component<any, State> {
         <div className="create-event-content">
           <div className="content-input">
             <input
+              type="file"
+              onChange={async (file: any) => {
+                console.log("file: ", file.target.files[0]);
+                const data = new FormData();
+                data.append(
+                  "file",
+                  file.target.files[0],
+                  file.target.files[0].name
+                );
+                let res = await AccountService.uploadPhoto(data);
+                console.log("res: ", res);
+              }}
+            />
+            <Input
               type="text"
-              className="input"
-              placeholder="Event Name"
-              onChange={event => {
-                this.setState({ name: event.target.value });
+              placeHolder="Event Name"
+              onChange={(value: any) => {
+                this.setState({ name: value });
               }}
             />
-            <input
+            <Input
               type="time"
               className="input time"
-              placeholder="Start Time"
-              onChange={event => {
-                this.setState({ start_time: event.target.value });
+              placeHolder="Start Time"
+              onChange={(value: any) => {
+                this.setState({ start_time: value });
               }}
             />
-            <input
+            <Input
               type="time"
               className="input time"
-              placeholder="End Time"
-              onChange={event => {
-                this.setState({ end_time: event.target.value });
+              placeHolder="Start Time"
+              onChange={(value: any) => {
+                this.setState({ end_time: value });
               }}
             />
-            <input
-              ref="input"
-              className="input"
-              placeholder="Location"
+            <InputLocation
               onChange={this.onPlacesChanged}
+              placeHolder="Location"
             />
             <textarea
               className="input description"
@@ -180,8 +180,12 @@ const mapStateToProps = (state: any, ownProps: any) => {
   };
 };
 
+const mapDispatchToProps = (dispatch: any) => ({
+  addEvent: (event: any) => dispatch(addEvent(event))
+});
+
 export const CreateEventDialogContainer = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CreateEventDialog);
 export default CreateEventDialogContainer;
