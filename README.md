@@ -1,7 +1,9 @@
 # Event App
+
 This is a fullstack web app to be used to see nearby events and to create events visible to the public!
 
-![alt text](https://raw.githubusercontent.com/skbrown333/EventApp/dev/Mock_Photo.png)
+![alt text](https://raw.githubusercontent.com/skbrown333/EventApp/dev/Mock_Photo_1.png)
+![alt text](https://raw.githubusercontent.com/skbrown333/EventApp/dev/Mock_Photo_2.png)
 
 ## Getting Started
 
@@ -23,24 +25,26 @@ After this finished cd into both the web and api directories and run
 npm install
 ```
 
-
 ## Running Locally
+
 To start the Web Server cd into web/ and run:
+
 ```
 HTTPS=true npm start
 ```
 
 To start up the backend cd into /api and run:
+
 ```
 nodemon start
 ```
 
 ## Built With
 
-* [React](https://reactjs.org/) - The front end web framework used
-* [Express](https://expressjs.com/) - The back end framework
-* [MongoDB](https://rometools.github.io/rome/) - The database
+- [React](https://reactjs.org/) - The front end web framework used
+- [Express](https://expressjs.com/) - The back end framework
+- [MongoDB](https://rometools.github.io/rome/) - The database
 
 ## Authors
-* Steffan Brown - skbrown333@gmail.com
 
+- Steffan Brown - skbrown333@gmail.com

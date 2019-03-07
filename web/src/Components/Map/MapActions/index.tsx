@@ -10,10 +10,10 @@ export class MapActions extends React.Component<any> {
   constructor(props: any) {
     super(props);
 
-    this.isPriest = this.isPriest.bind(this);
+    this.isUser = this.isUser.bind(this);
   }
 
-  isPriest() {
+  isUser() {
     let account = this.props.account;
 
     if (Object.keys(account).length > 0) {
@@ -67,7 +67,7 @@ export class MapActions extends React.Component<any> {
           </IconButton>
         </Tooltip>
 
-        {this.isPriest()}
+        {this.isUser()}
       </div>
     );
   }
