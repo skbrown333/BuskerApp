@@ -1,9 +1,7 @@
-# Priestly
-This is a fullstack web app to be used by Priests to offer confession, mass, etc. Any type of contributions are welcome and encouraged!
+# Event App
+This is a fullstack web app to be used to see nearby events and to create events visible to the public!
 
-If you have any questions please feel free to reach out.
-
-![alt text](https://raw.githubusercontent.com/skbrown333/Priestly/dev/Mock_Photo.png)
+![alt text](https://raw.githubusercontent.com/skbrown333/EventApp/dev/Mock_Photo.png)
 
 ## Getting Started
 
@@ -15,10 +13,8 @@ You will also need your own Google Maps API key. It will need to be stored in an
 
 You will need to download/clone the repo to your local machine
 
-Say what the step will be
-
 ```
-git clone https://github.com/skbrown333/Priestly.git
+git clone https://github.com/skbrown333/EventApp.git
 ```
 
 After this finished cd into both the web and api directories and run
