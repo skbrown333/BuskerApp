@@ -21,7 +21,7 @@ export class App extends React.Component<any> {
     this.state = {
       loadingAccount: true,
       loadingAccounts: true,
-      loadingEvents: true,
+      loadingEvents: true
     };
 
     this.getAccount = this.getAccount.bind(this);
@@ -41,7 +41,7 @@ export class App extends React.Component<any> {
       let events = await EventService.getAll();
       this.props.updateEvents(events);
       this.setState({ loadingEvents: false });
-    } catch(err) {
+    } catch (err) {
       this.setState({ loadingEvents: false });
     }
   }
@@ -51,7 +51,7 @@ export class App extends React.Component<any> {
       let accounts = await AccountService.getAll();
       this.props.updateAccounts(accounts);
       this.setState({ loadingAccounts: false });
-    } catch(err) {
+    } catch (err) {
       this.setState({ loadingAccounts: false });
     }
   }
@@ -73,23 +73,23 @@ export class App extends React.Component<any> {
       this.props.updateAccount(data.account);
       this.setState({ loadingAccount: false });
     } catch {
-      console.log("Error getting account");
+      this.setState({ loadingAccount: false });
     }
   }
 
   getContent() {
-    if (!this.state.loadingAccount && !this.state.loadingEvents && !this.state.loadingAccounts) {
+    if (
+      !this.state.loadingAccount &&
+      !this.state.loadingEvents &&
+      !this.state.loadingAccounts
+    ) {
       return (
         <div className="app">
           <Route
             path="/"
             render={() => <Header cookies={this.props.cookies} />}
           />
-          <Route
-            exact
-            path="/"
-            component={SidebarContainer}
-          />
+          <Route exact path="/" component={SidebarContainer} />
           <Route
             exact
             path="/"
@@ -100,10 +100,11 @@ export class App extends React.Component<any> {
             path="/login"
             render={() => <LoginContainer cookies={this.props.cookies} />}
           />
-          <Route 
-            exact 
-            path="/profile" 
-            render={() => <ProfileContainer cookies={this.props.cookies} />} />
+          <Route
+            exact
+            path="/profile"
+            render={() => <ProfileContainer cookies={this.props.cookies} />}
+          />
         </div>
       );
     }
