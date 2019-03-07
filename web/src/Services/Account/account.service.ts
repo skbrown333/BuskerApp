@@ -1,6 +1,6 @@
 import { BaseService } from "../BaseService";
 import { ROUTES } from "../../Constants/constants";
-import axios from "axios";
+import axios from "../axios.instance";
 
 class AccountService extends BaseService {
   constructor() {

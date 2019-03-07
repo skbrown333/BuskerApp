@@ -32,7 +32,7 @@ function wrapAsync(fn) {
 }
 
 function handleError(error, req, res, next) {
-  res.json({ message: error.message, status: error.status });
+  res.send(500).json({ message: error.message, status: error.status });
 }
 
 let utils = {

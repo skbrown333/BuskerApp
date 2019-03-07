@@ -16,13 +16,13 @@ interface CreateEventProps {
 }
 interface State {
   readonly fullScreen: boolean;
-  readonly name: string;
-  readonly start_time: string;
-  readonly end_time: string;
+  readonly name: any;
+  readonly start_time: any;
+  readonly end_time: any;
   readonly lat: any;
   readonly lng: any;
-  readonly description: string;
-  readonly address: string;
+  readonly description: any;
+  readonly address: any;
 }
 export class CreateEventDialog extends React.Component<any, State> {
   readonly state: State;
@@ -54,6 +54,15 @@ export class CreateEventDialog extends React.Component<any, State> {
   handleOpen() {
     this.resizeListener = window.addEventListener("resize", this.resize);
     this.resize();
+    this.setState({
+      name: null,
+      start_time: null,
+      end_time: null,
+      lat: null,
+      lng: null,
+      description: null,
+      address: null
+    });
   }
 
   handleClose() {

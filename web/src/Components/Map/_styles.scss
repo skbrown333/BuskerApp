@@ -2,15 +2,15 @@
 @import "./MapActions/styles";
 
 .map {
-    flex: 1;
-    position: relative;
-    padding: 5px;
-    background-color: $white;
-    border-radius: 2px;
+  flex: 1;
+  position: relative;
+  padding: 3px;
+  background-color: $white;
+  border-radius: 2px;
 
-    div:nth-of-type(2) {
-        div:first-of-type {
-            border-radius: 2px
-        }
+  div:nth-of-type(2) {
+    div:first-of-type {
+      border-radius: 2px;
     }
+  }
 }

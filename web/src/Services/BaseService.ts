@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios.instance";
 
 export class BaseService {
   route: string;
@@ -18,11 +18,7 @@ export class BaseService {
   }
 
   async create(options: Object) {
-    try {
-      let res = await axios.post(this.route + "/create", options);
-      return res.data.model;
-    } catch (err) {
-      console.error();
-    }
+    let res = await axios.post(this.route + "/create", options);
+    return res.data.model;
   }
 }

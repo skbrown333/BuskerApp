@@ -16,8 +16,8 @@ let Event = new Schema(
       type: Schema.Types.ObjectId,
       required: true
     },
-    name: String,
-    description: String,
+    name: { type: String, required: true },
+    description: { type: String, required: true },
     love: { type: Number, default: 0 },
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },
