@@ -40,6 +40,7 @@ export class Profile extends React.Component<any, any> {
         </div>
         <MapContainer
           hideActions={true}
+          noUpdate={true}
           center={{ lat: account.lat, lng: account.lng }}
         />
       </div>

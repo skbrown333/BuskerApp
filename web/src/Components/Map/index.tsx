@@ -12,7 +12,6 @@ import SearchDialog from "../../Dialogs/SearchDialog";
 import CreateEventDialogContainer from "../../Dialogs/CreateEventDialog";
 
 import { updateCenter } from "../../store/actions";
-import { array } from "prop-types";
 
 /* Services */
 
@@ -90,7 +89,7 @@ export class Map extends React.Component<any, State> {
 
   /* LOCATION */
   onMapChange(properties: any) {
-    this.props.updateCenter(properties.center);
+    if (!this.props.noUpdate) this.props.updateCenter(properties.center);
     this.setState({zoom: properties.zoom });
   }
 

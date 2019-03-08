@@ -3,11 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import UserIcon from "@material-ui/icons/PersonOutlined";
 import LocationIcon from "@material-ui/icons/PlaceOutlined";
-import HeartIcon from "@material-ui/icons/Favorite";
-import HeartIconOutline from "@material-ui/icons/FavoriteBorder";
 import TimeIcon from "@material-ui/icons/AccessTime";
-import { Event } from "../../modules/Event";
-import accountService from "../../Services/Account/account.service";
 
 interface EventProps {
   onClose: any;
@@ -50,7 +46,7 @@ class EventDialog extends React.Component<EventProps, State> {
 
   render() {
     let event = this.props.event;
-
+    
     return (
       <Dialog
         onClose={this.handleClose}
